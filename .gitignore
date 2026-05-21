@@ -1,0 +1,39 @@
+# ================================================================
+# .gitignore — Los Elegidos Colombia
+# Lista de archivos y carpetas que Git NO debe rastrear ni subir
+# ================================================================
+
+# --- Archivos confidenciales y de entorno ---
+confidencial.txt
+.env
+.env.local
+.env.production
+*.env
+
+# --- Contraseñas, claves y tokens ---
+secrets.txt
+credentials.txt
+api-keys.txt
+*.key
+*.pem
+
+# --- Carpetas del sistema operativo ---
+.DS_Store          # macOS
+Thumbs.db          # Windows
+desktop.ini        # Windows
+
+# --- Carpetas de editores e IDEs ---
+.vscode/
+.idea/
+*.suo
+*.user
+
+# --- Node.js (por si se agrega más adelante) ---
+node_modules/
+npm-debug.log
+package-lock.json
+
+# --- Archivos temporales ---
+*.tmp
+*.log
+*.bak
