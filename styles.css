@@ -267,8 +267,10 @@ input, select, textarea { font-family: var(--sans); }
   max-width: 220px;
   object-fit: contain;
   display: block;
+  /* screen: los píxeles negros desaparecen, el dorado permanece */
+  mix-blend-mode: screen;
   transition: opacity var(--tr), transform var(--tr);
-  filter: drop-shadow(0 2px 8px rgba(201,168,76,0.18));
+  filter: drop-shadow(0 2px 12px rgba(201,168,76,0.25));
 }
 .nav-logo-img:hover {
   opacity: 0.9;
