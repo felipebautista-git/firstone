@@ -247,8 +247,8 @@ input, select, textarea { font-family: var(--sans); }
 .nav-inner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 2rem;
-  height: 70px;
+  padding: 0 2.5rem;
+  height: 90px;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -262,13 +262,18 @@ input, select, textarea { font-family: var(--sans); }
 
 /* Logo imagen en el navbar */
 .nav-logo-img {
-  height: 44px;
+  height: 70px;
   width: auto;
+  max-width: 220px;
   object-fit: contain;
   display: block;
-  transition: opacity var(--tr);
+  transition: opacity var(--tr), transform var(--tr);
+  filter: drop-shadow(0 2px 8px rgba(201,168,76,0.18));
 }
-.nav-logo-img:hover { opacity: 0.85; }
+.nav-logo-img:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
 
 /* Fallback en texto (visible solo si la imagen no carga) */
 .nav-logo-text {
@@ -345,7 +350,7 @@ input, select, textarea { font-family: var(--sans); }
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding-top: 70px;
+  padding-top: 90px;
 }
 
 /* Fondo con patrón de grid */
@@ -1770,6 +1775,8 @@ input, select, textarea { font-family: var(--sans); }
   /* Nav móvil */
   .btn-nav { display: none; }
   .hamburger { display: flex; margin-left: auto; }
+  .nav-logo-img { height: 54px; max-width: 170px; }
+  .nav-inner { height: 74px; padding: 0 1.5rem; }
 
   .nav-links {
     position: fixed;
