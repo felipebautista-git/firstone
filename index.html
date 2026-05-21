@@ -23,7 +23,16 @@
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#inicio" class="nav-logo">
-      <span class="logo-main">Los Elegidos</span><span class="logo-sub">Colombia</span>
+      <img
+        src="images/Logo_Elegidos.png"
+        alt="Los Elegidos Colombia"
+        class="nav-logo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      >
+      <!-- Fallback en texto si la imagen aún no está cargada -->
+      <span class="nav-logo-text" style="display:none;">
+        <span class="logo-main">Los Elegidos</span><span class="logo-sub">Colombia</span>
+      </span>
     </a>
 
     <ul class="nav-links" id="navLinks">

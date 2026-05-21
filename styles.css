@@ -256,9 +256,24 @@ input, select, textarea { font-family: var(--sans); }
 
 .nav-logo {
   display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Logo imagen en el navbar */
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: opacity var(--tr);
+}
+.nav-logo-img:hover { opacity: 0.85; }
+
+/* Fallback en texto (visible solo si la imagen no carga) */
+.nav-logo-text {
   flex-direction: column;
   line-height: 1.1;
-  flex-shrink: 0;
 }
 .logo-main {
   font-family: var(--display);
