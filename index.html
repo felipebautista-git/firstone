@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Los Elegidos Colombia — Consultoría empresarial premium para pymes. Estrategia, procesos, Business Intelligence y automatización.">
+  <title>Los Elegidos Colombia | Consultoría Empresarial Premium</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================================================================
+     NAVBAR
+     ================================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo">
+      <span class="logo-main">Los Elegidos</span><span class="logo-sub">Colombia</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio" class="nav-link">Inicio</a></li>
+      <li><a href="#metodo" class="nav-link">Método</a></li>
+      <li><a href="#servicios" class="nav-link">Servicios</a></li>
+      <li><a href="#dataworld" class="nav-link">DataWorld</a></li>
+      <li><a href="#diagnostico" class="nav-link">Diagnóstico</a></li>
+      <li><a href="#contacto" class="nav-link">Contacto</a></li>
+    </ul>
+
+    <a href="#diagnostico" class="btn-nav">Solicitar diagnóstico</a>
+
+    <!-- Hamburger: 3 barras que se convierten en X en móvil -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Overlay oscuro para menú móvil -->
+<div class="nav-overlay" id="navOverlay"></div>
+
+
+<!-- ================================================================
+     HERO — Sección principal
+     ================================================================ -->
+<section id="inicio" class="hero">
+  <!-- Fondo decorativo: grid + orbes de color -->
+  <div class="hero-grid-bg"></div>
+  <div class="hero-orb hero-orb--blue"></div>
+  <div class="hero-orb hero-orb--gold"></div>
+
+  <div class="container hero-container">
+
+    <!-- Texto del hero -->
+    <div class="hero-content" data-animate="fade-up">
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        Consultoría Estratégica &nbsp;·&nbsp; Business Intelligence &nbsp;·&nbsp; Automatización
+      </div>
+
+      <h1 class="hero-title">
+        Convertimos empresas con potencial en
+        <span class="hero-title-highlight">organizaciones listas para escalar.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Acompañamos a pymes a crecer con orden, procesos, datos, automatización y
+        seguimiento gerencial. No solo diseñamos la estrategia: ayudamos a implementarla.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#diagnostico" class="btn-primary">
+          <i class="fas fa-chart-line"></i> Solicitar diagnóstico
+        </a>
+        <a href="#metodo" class="btn-outline-light">
+          Conocer el método <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="hero-micro">
+        <span><i class="fas fa-check-circle"></i> Estrategia</span>
+        <span><i class="fas fa-check-circle"></i> BI &amp; DataWorld</span>
+        <span><i class="fas fa-check-circle"></i> Automatización</span>
+        <span><i class="fas fa-check-circle"></i> IA Aplicada</span>
+      </div>
+    </div>
+
+    <!-- Visual decorativo: dashboard simulado -->
+    <div class="hero-visual" data-animate="fade-left">
+      <div class="mock-dashboard">
+        <!-- Tarjeta principal del dashboard -->
+        <div class="dash-card dash-main">
+          <div class="dash-header">
+            <span class="dash-title"><i class="fas fa-chart-pie"></i> Panel Gerencial</span>
+            <span class="dash-live"><span class="live-dot"></span>En vivo</span>
+          </div>
+          <div class="dash-kpis">
+            <div class="dash-kpi">
+              <span class="kpi-label">Ventas del mes</span>
+              <span class="kpi-value">$847M</span>
+              <span class="kpi-delta"><i class="fas fa-arrow-trend-up"></i> +23%</span>
+            </div>
+            <div class="dash-kpi">
+              <span class="kpi-label">Cumpl. KPI</span>
+              <span class="kpi-value">94%</span>
+              <span class="kpi-delta"><i class="fas fa-arrow-trend-up"></i> +8pt</span>
+            </div>
+          </div>
+          <div class="dash-bars">
+            <div class="bar" style="--h:45%"></div>
+            <div class="bar" style="--h:62%"></div>
+            <div class="bar" style="--h:38%"></div>
+            <div class="bar" style="--h:78%"></div>
+            <div class="bar" style="--h:55%"></div>
+            <div class="bar" style="--h:90%"></div>
+            <div class="bar bar--active" style="--h:83%"></div>
+          </div>
+        </div>
+
+        <!-- Tarjetas flotantes -->
+        <div class="dash-float dash-float--1">
+          <i class="fas fa-arrow-trend-up"></i>
+          <div>
+            <strong>+127%</strong>
+            <span>Control operativo</span>
+          </div>
+        </div>
+        <div class="dash-float dash-float--2">
+          <i class="fas fa-bolt"></i>
+          <div>
+            <strong>Tiempo real</strong>
+            <span>Decisiones</span>
+          </div>
+        </div>
+        <div class="dash-float dash-float--3">
+          <i class="fas fa-database"></i>
+          <div>
+            <strong>DataWorld</strong>
+            <span>Activo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-container -->
+
+  <div class="hero-scroll-hint">
+    <span>Descubrir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     TRUST BAR — Métricas de credibilidad
+     ================================================================ -->
+<div class="trust-bar" data-animate="fade-up">
+  <div class="container trust-inner">
+    <div class="trust-item">
+      <span class="trust-num">+120</span>
+      <span class="trust-lbl">Pymes asesoradas</span>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <span class="trust-num">8+</span>
+      <span class="trust-lbl">Años de experiencia</span>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <span class="trust-num">95%</span>
+      <span class="trust-lbl">Satisfacción cliente</span>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <span class="trust-num">3x</span>
+      <span class="trust-lbl">Crecimiento promedio</span>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <span class="trust-num">7</span>
+      <span class="trust-lbl">Líneas de servicio</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     PROBLEMAS — Dolores del empresario
+     ================================================================ -->
+<section id="problemas" class="section section--dark">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">El diagnóstico</span>
+      <h2 class="section-title">
+        Cuando una empresa crece sin control,<br>
+        <span class="text-gold">el crecimiento empieza a doler.</span>
+      </h2>
+      <p class="section-sub">¿Reconoces alguna de estas situaciones en tu empresa?</p>
+    </div>
+
+    <div class="problems-grid" data-animate="fade-up">
+      <div class="problem-card">
+        <div class="pc-icon"><i class="fas fa-chart-line-down"></i></div>
+        <h3>Ventas sin seguimiento real</h3>
+        <p>Sabes cuánto vendes, pero no sabes por qué pierdes clientes ni cómo mejorar la conversión.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon"><i class="fas fa-table-cells-large"></i></div>
+        <h3>Información dispersa</h3>
+        <p>Los datos viven en Excel, WhatsApp, correos y sistemas que no se hablan entre sí.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon"><i class="fas fa-fire-flame-curved"></i></div>
+        <h3>Gerencia apagando incendios</h3>
+        <p>El día a día consume todo el tiempo y no queda energía para pensar estratégicamente.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon"><i class="fas fa-person-circle-question"></i></div>
+        <h3>Procesos en la cabeza de uno</h3>
+        <p>Si esa persona falta, todo se detiene. El conocimiento no está documentado ni transferido.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon"><i class="fas fa-brain"></i></div>
+        <h3>Decisiones por intuición</h3>
+        <p>Se toman decisiones importantes sin datos confiables, actualizados y en tiempo real.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon"><i class="fas fa-bullseye"></i></div>
+        <h3>Equipos sin metas claras</h3>
+        <p>Cada quien trabaja a su ritmo sin saber cómo su trabajo impacta los resultados del negocio.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon"><i class="fas fa-clock-rotate-left"></i></div>
+        <h3>Reportes que llegan tarde</h3>
+        <p>Cuando el informe está listo, la decisión ya fue tomada. O peor: ya no importa.</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon"><i class="fas fa-eye-slash"></i></div>
+        <h3>Sin visibilidad financiera</h3>
+        <p>No hay claridad sobre la rentabilidad real por producto, cliente, canal o punto de venta.</p>
+      </div>
+    </div>
+
+    <div class="problems-close" data-animate="fade-up">
+      <blockquote>
+        <i class="fas fa-quote-left"></i>
+        El problema no siempre es vender más. Muchas veces el verdadero reto es construir
+        un sistema que pueda <strong>sostener el crecimiento.</strong>
+      </blockquote>
+      <a href="#diagnostico" class="btn-primary btn-sm">Diagnosticar mi empresa</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     SOLUCIÓN — 5 Pilares
+     ================================================================ -->
+<section id="solucion" class="section section--light">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">La solución</span>
+      <h2 class="section-title section-title--dark">
+        Creamos el sistema que tu empresa necesita<br>
+        <span class="text-gold">para crecer con control.</span>
+      </h2>
+      <p class="section-sub section-sub--dark">
+        Nuestro modelo trabaja los 5 pilares que toda pyme necesita para escalar de forma sostenible.
+      </p>
+    </div>
+
+    <div class="pillars-grid" data-animate="fade-up">
+      <div class="pillar-card">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon"><i class="fas fa-chess-king"></i></div>
+        <h3>Estrategia empresarial</h3>
+        <p>Definimos el norte claro: propósito, mercado, ventaja competitiva, modelo de negocio y prioridades.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon"><i class="fas fa-gears"></i></div>
+        <h3>Procesos y estandarización</h3>
+        <p>Documentamos y optimizamos los procesos críticos para que la empresa no dependa de personas clave.</p>
+      </div>
+      <div class="pillar-card pillar-card--featured">
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon"><i class="fas fa-chart-pie"></i></div>
+        <h3>Indicadores y tableros</h3>
+        <p>Instalamos KPIs y dashboards en tiempo real para tomar decisiones con datos, no con intuición.</p>
+        <span class="pillar-badge">DataWorld</span>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">04</div>
+        <div class="pillar-icon"><i class="fas fa-robot"></i></div>
+        <h3>Automatización e IA</h3>
+        <p>Automatizamos tareas repetitivas y aplicamos IA donde genera el mayor impacto en tu operación.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">05</div>
+        <div class="pillar-icon"><i class="fas fa-handshake"></i></div>
+        <h3>Seguimiento e implementación</h3>
+        <p>Acompañamos la ejecución semana a semana. La estrategia vale solo si se implementa con disciplina.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     MÉTODO — 4 Fases
+     ================================================================ -->
+<section id="metodo" class="section section--dark">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">Cómo trabajamos</span>
+      <h2 class="section-title">El Método <span class="text-gold">Los Elegidos</span></h2>
+      <p class="section-sub">Un proceso probado en más de 120 pymes colombianas.</p>
+    </div>
+
+    <div class="timeline" data-animate="fade-up">
+
+      <div class="tl-step">
+        <div class="tl-indicator">
+          <div class="tl-num">01</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <span class="tl-phase">Fase 1</span>
+          <h3>Diagnóstico profundo</h3>
+          <p>Analizamos la realidad de la empresa: procesos, números, equipo, riesgos y oportunidades. Sin filtros, sin suposiciones.</p>
+          <div class="tl-deliverables">
+            <span><i class="fas fa-check"></i> Análisis 360° del negocio</span>
+            <span><i class="fas fa-check"></i> Mapa de riesgos y cuellos de botella</span>
+            <span><i class="fas fa-check"></i> Informe ejecutivo de oportunidades</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-indicator">
+          <div class="tl-num">02</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <span class="tl-phase">Fase 2</span>
+          <h3>Diseño del sistema de crecimiento</h3>
+          <p>Creamos un roadmap claro con KPIs, procesos estandarizados, tableros de control, automatizaciones y prioridades ordenadas.</p>
+          <div class="tl-deliverables">
+            <span><i class="fas fa-check"></i> Mapa de KPIs y tablero de control</span>
+            <span><i class="fas fa-check"></i> Procesos críticos documentados</span>
+            <span><i class="fas fa-check"></i> Plan de automatización e IA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-indicator">
+          <div class="tl-num">03</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <span class="tl-phase">Fase 3</span>
+          <h3>Implementación acompañada</h3>
+          <p>No entregamos un PDF y desaparecemos. Acompañamos la ejecución con seguimiento semanal y ajustes en tiempo real.</p>
+          <div class="tl-deliverables">
+            <span><i class="fas fa-check"></i> Reunión semanal con gerencia</span>
+            <span><i class="fas fa-check"></i> Tableros activos desde semana 1</span>
+            <span><i class="fas fa-check"></i> Capacitación del equipo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step tl-step--last">
+        <div class="tl-indicator">
+          <div class="tl-num">04</div>
+        </div>
+        <div class="tl-body">
+          <span class="tl-phase">Fase 4</span>
+          <h3>Medición y mejora continua</h3>
+          <p>Instalamos una cultura de datos y mejora continua. La empresa aprende a decidir mejor, ejecutar con disciplina y crecer cada mes.</p>
+          <div class="tl-deliverables">
+            <span><i class="fas fa-check"></i> Cultura de datos instalada</span>
+            <span><i class="fas fa-check"></i> Comité mensual de resultados</span>
+            <span><i class="fas fa-check"></i> Sistema de mejora continua activo</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+
+    <div class="section-cta" data-animate="fade-up">
+      <a href="#diagnostico" class="btn-primary">
+        <i class="fas fa-rocket"></i> Quiero empezar con un diagnóstico
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     SERVICIOS — 7 Tarjetas
+     ================================================================ -->
+<section id="servicios" class="section section--mid">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">Lo que hacemos</span>
+      <h2 class="section-title">Servicios diseñados para <span class="text-gold">pymes que quieren escalar</span></h2>
+      <p class="section-sub">Resultados medibles, no solo recomendaciones en papel.</p>
+    </div>
+
+    <div class="services-grid" data-animate="fade-up">
+
+      <div class="service-card">
+        <div class="sc-icon"><i class="fas fa-chess-king"></i></div>
+        <h3>Consultoría Estratégica</h3>
+        <p>Definimos el norte de tu empresa con claridad: visión, modelo de negocio, ventaja competitiva y plan ejecutable.</p>
+        <ul class="sc-list">
+          <li>Planeación estratégica 3–5 años</li>
+          <li>Modelo de negocio y propuesta de valor</li>
+          <li>OKRs y KPIs estratégicos</li>
+          <li>Roadmap de crecimiento</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon"><i class="fas fa-gears"></i></div>
+        <h3>Procesos y Estandarización</h3>
+        <p>Documentamos y optimizamos los procesos críticos para que tu empresa funcione sin depender de personas clave.</p>
+        <ul class="sc-list">
+          <li>Mapeo y rediseño de procesos</li>
+          <li>Manuales operativos</li>
+          <li>Indicadores de eficiencia</li>
+          <li>Planes de continuidad</li>
+        </ul>
+      </div>
+
+      <div class="service-card service-card--featured">
+        <span class="sc-badge">DataWorld</span>
+        <div class="sc-icon"><i class="fas fa-chart-pie"></i></div>
+        <h3>Business Intelligence y Dashboards</h3>
+        <p>Conectamos tus fuentes de datos y construimos tableros gerenciales en Power BI para decisiones en tiempo real.</p>
+        <ul class="sc-list">
+          <li>Dashboards en Power BI</li>
+          <li>Integración de fuentes (ERP, Excel, CRM)</li>
+          <li>Modelos de datos empresariales</li>
+          <li>Reportes automatizados</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon"><i class="fas fa-robot"></i></div>
+        <h3>Automatización e IA Aplicada</h3>
+        <p>Automatizamos tareas repetitivas e integramos IA en los procesos donde genera el mayor impacto.</p>
+        <ul class="sc-list">
+          <li>Automatización de flujos de trabajo</li>
+          <li>IA para seguimiento comercial</li>
+          <li>Bots y asistentes virtuales</li>
+          <li>Reportes automáticos</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon"><i class="fas fa-bullseye"></i></div>
+        <h3>Dirección Comercial y Ventas</h3>
+        <p>Construimos el sistema comercial: proceso de ventas, seguimiento de pipeline, formación del equipo y control de metas.</p>
+        <ul class="sc-list">
+          <li>Proceso y embudo comercial</li>
+          <li>CRM y seguimiento de leads</li>
+          <li>Metas y comisiones basadas en datos</li>
+          <li>Coaching al equipo comercial</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon"><i class="fas fa-coins"></i></div>
+        <h3>Control Financiero y Rentabilidad</h3>
+        <p>Visibilidad financiera real: rentabilidad por producto, cliente, punto de venta y flujo de caja proyectado.</p>
+        <ul class="sc-list">
+          <li>Estructura de costos y márgenes</li>
+          <li>Flujo de caja proyectado</li>
+          <li>Rentabilidad por unidad de negocio</li>
+          <li>Indicadores financieros clave</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-icon"><i class="fas fa-layer-group"></i></div>
+        <h3>Implementación de Sistemas</h3>
+        <p>Evaluamos, seleccionamos e implementamos los sistemas de gestión adecuados para el momento de tu empresa.</p>
+        <ul class="sc-list">
+          <li>Selección de ERP, CRM y POS</li>
+          <li>Implementación y migración de datos</li>
+          <li>Capacitación del equipo</li>
+          <li>Integración entre sistemas</li>
+        </ul>
+      </div>
+
+    </div><!-- /services-grid -->
+  </div>
+</section>
+
+
+<!-- ================================================================
+     DATAWORLD — Sección especial de inteligencia de datos
+     ================================================================ -->
+<section id="dataworld" class="section section--dataworld">
+  <div class="dw-bg-grid"></div>
+  <div class="container">
+
+    <div class="dw-header" data-animate="fade-up">
+      <div class="dw-logo-badge">
+        <i class="fas fa-database"></i> DataWorld
+      </div>
+      <span class="section-tag">Unidad de inteligencia de datos</span>
+      <h2 class="section-title">El centro de inteligencia de datos<br><span class="text-electric">de Los Elegidos Colombia.</span></h2>
+      <p class="section-sub">
+        Tu empresa ya genera datos todos los días.<br>
+        La pregunta es si los estás usando para tomar <strong>mejores decisiones.</strong>
+      </p>
+    </div>
+
+    <div class="dw-content" data-animate="fade-up">
+      <div class="dw-description">
+        <p>DataWorld convierte los datos dispersos de tu empresa — en Excel, POS, WhatsApp, ERP o cualquier otra fuente — en <strong>dashboards inteligentes</strong> que la gerencia puede leer en segundos.</p>
+        <p>No más esperar reportes a fin de mes. No más decisiones a ciegas. <strong>Toma decisiones en tiempo real</strong> con información actualizada, visual y clara.</p>
+        <a href="#contacto" class="btn-electric">
+          <i class="fas fa-chart-bar"></i> Quiero ver mi empresa en un dashboard
+        </a>
+      </div>
+
+      <div class="dw-modules-wrap">
+        <p class="dw-modules-title">Áreas que conectamos y visualizamos</p>
+        <div class="dw-modules">
+          <div class="dw-module"><i class="fas fa-chart-line"></i><span>Ventas</span></div>
+          <div class="dw-module"><i class="fas fa-coins"></i><span>Finanzas</span></div>
+          <div class="dw-module"><i class="fas fa-boxes-stacked"></i><span>Inventario</span></div>
+          <div class="dw-module"><i class="fas fa-industry"></i><span>Producción</span></div>
+          <div class="dw-module"><i class="fas fa-users"></i><span>Nómina</span></div>
+          <div class="dw-module"><i class="fas fa-user-group"></i><span>Clientes</span></div>
+          <div class="dw-module"><i class="fas fa-truck"></i><span>Operación</span></div>
+          <div class="dw-module"><i class="fas fa-flag-checkered"></i><span>Metas</span></div>
+          <div class="dw-module"><i class="fas fa-file-invoice-dollar"></i><span>Cartera</span></div>
+          <div class="dw-module"><i class="fas fa-percent"></i><span>Rentabilidad</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dw-tech" data-animate="fade-up">
+      <span class="dw-tech-label">Stack tecnológico</span>
+      <div class="dw-stack">
+        <span><i class="fas fa-chart-bar"></i> Power BI</span>
+        <span><i class="fas fa-table"></i> Excel Avanzado</span>
+        <span><i class="fas fa-database"></i> SQL</span>
+        <span><i class="fas fa-plug"></i> APIs</span>
+        <span><i class="fas fa-cloud"></i> Azure</span>
+        <span><i class="fas fa-robot"></i> IA / Copilot</span>
+        <span><i class="fas fa-shuffle"></i> Power Automate</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PROGRAMA EMPRESA ESCALABLE
+     ================================================================ -->
+<section id="programa" class="section section--dark">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">Producto estrella</span>
+      <h2 class="section-title">Programa <span class="text-gold">Empresa Escalable</span></h2>
+      <p class="section-sub">El acompañamiento más completo que ofrecemos para pymes listas para transformarse.</p>
+    </div>
+
+    <div class="program-card" data-animate="fade-up">
+      <div class="program-left">
+        <div class="program-badge">Programa Premium</div>
+        <h3 class="program-title">Empresa Escalable</h3>
+        <p class="program-duration"><i class="fas fa-calendar-range"></i> Acompañamiento de 3 a 6 meses</p>
+        <p class="program-desc">
+          Un programa de transformación estructurada para pymes que quieren crecer con orden, datos y control.
+          No solo te decimos qué hacer: lo hacemos juntos.
+        </p>
+        <div class="program-includes">
+          <h4><i class="fas fa-circle-check"></i> Qué incluye</h4>
+          <div class="program-items">
+            <div class="prog-item"><i class="fas fa-magnifying-glass-chart"></i><span>Diagnóstico empresarial inicial completo</span></div>
+            <div class="prog-item"><i class="fas fa-map"></i><span>Roadmap estratégico personalizado</span></div>
+            <div class="prog-item"><i class="fas fa-calendar-check"></i><span>Reunión semanal con gerencia</span></div>
+            <div class="prog-item"><i class="fas fa-chart-pie"></i><span>Implementación de tableros y dashboards</span></div>
+            <div class="prog-item"><i class="fas fa-gears"></i><span>Estandarización de procesos críticos</span></div>
+            <div class="prog-item"><i class="fas fa-robot"></i><span>Automatización de tareas clave</span></div>
+            <div class="prog-item"><i class="fas fa-bullseye"></i><span>Diseño e implementación de KPIs</span></div>
+            <div class="prog-item"><i class="fas fa-users-gear"></i><span>Comité mensual de resultados</span></div>
+            <div class="prog-item"><i class="fas fa-chalkboard-user"></i><span>Capacitación del equipo gerencial</span></div>
+            <div class="prog-item"><i class="fas fa-headset"></i><span>Acompañamiento en toma de decisiones</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="program-right">
+        <div class="program-results">
+          <h4>Al finalizar el programa tendrás</h4>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Empresa con procesos claros y documentados</li>
+            <li><i class="fas fa-check-circle"></i> Dashboards gerenciales funcionando</li>
+            <li><i class="fas fa-check-circle"></i> KPIs instalados y monitoreados</li>
+            <li><i class="fas fa-check-circle"></i> Tareas críticas automatizadas</li>
+            <li><i class="fas fa-check-circle"></i> Equipo capacitado y alineado</li>
+            <li><i class="fas fa-check-circle"></i> Sistema de mejora continua activo</li>
+          </ul>
+        </div>
+        <a href="#contacto" class="btn-primary btn-large">
+          <i class="fas fa-rocket"></i> Aplicar al programa
+        </a>
+        <p class="program-note">
+          <i class="fas fa-info-circle"></i>
+          Las plazas son limitadas. Seleccionamos empresas con potencial real de transformación.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     DIAGNÓSTICO INTERACTIVO
+     ================================================================ -->
+<section id="diagnostico" class="section section--mid">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">Herramienta gratuita</span>
+      <h2 class="section-title">Diagnóstico <span class="text-gold">empresarial</span></h2>
+      <p class="section-sub">5 preguntas para entender el estado actual de tu empresa y recibir una recomendación.</p>
+    </div>
+
+    <div class="diag-widget" data-animate="fade-up">
+
+      <!-- Barra de progreso -->
+      <div class="diag-progress" id="diagProgress">
+        <div class="diag-progress-bar" id="diagBar"></div>
+        <span class="diag-progress-text" id="diagProgressText">Pregunta 1 de 5</span>
+      </div>
+
+      <!-- Preguntas -->
+      <div id="diagQuestions">
+
+        <div class="diag-q active" data-q="1">
+          <h3>¿Dónde vive hoy la mayor parte de la información de tu empresa?</h3>
+          <div class="diag-options">
+            <label class="diag-opt" data-val="2"><input type="radio" name="q1" value="2"><i class="fas fa-table"></i><span>Excel y hojas de cálculo</span></label>
+            <label class="diag-opt" data-val="1"><input type="radio" name="q1" value="1"><i class="fab fa-whatsapp"></i><span>WhatsApp y correos</span></label>
+            <label class="diag-opt" data-val="3"><input type="radio" name="q1" value="3"><i class="fas fa-server"></i><span>ERP o POS centralizado</span></label>
+            <label class="diag-opt" data-val="1"><input type="radio" name="q1" value="1"><i class="fas fa-plug-circle-xmark"></i><span>Varias fuentes desconectadas</span></label>
+          </div>
+          <button class="btn-diag-next" onclick="diagNext(1)" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="diag-q" data-q="2">
+          <h3>¿Con qué frecuencia revisas indicadores reales de tu empresa?</h3>
+          <div class="diag-options">
+            <label class="diag-opt" data-val="4"><input type="radio" name="q2" value="4"><i class="fas fa-calendar-day"></i><span>Todos los días</span></label>
+            <label class="diag-opt" data-val="3"><input type="radio" name="q2" value="3"><i class="fas fa-calendar-week"></i><span>Cada semana</span></label>
+            <label class="diag-opt" data-val="2"><input type="radio" name="q2" value="2"><i class="fas fa-calendar-days"></i><span>Cada mes</span></label>
+            <label class="diag-opt" data-val="1"><input type="radio" name="q2" value="1"><i class="fas fa-calendar-xmark"></i><span>Casi nunca</span></label>
+          </div>
+          <button class="btn-diag-next" onclick="diagNext(2)" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="diag-q" data-q="3">
+          <h3>¿Qué área te genera mayor dolor hoy en tu empresa?</h3>
+          <div class="diag-options diag-options--3col">
+            <label class="diag-opt" data-val="2" data-area="ventas"><input type="radio" name="q3" value="2"><i class="fas fa-chart-line"></i><span>Ventas</span></label>
+            <label class="diag-opt" data-val="2" data-area="finanzas"><input type="radio" name="q3" value="2"><i class="fas fa-coins"></i><span>Finanzas</span></label>
+            <label class="diag-opt" data-val="2" data-area="operación"><input type="radio" name="q3" value="2"><i class="fas fa-gears"></i><span>Operación</span></label>
+            <label class="diag-opt" data-val="2" data-area="inventario"><input type="radio" name="q3" value="2"><i class="fas fa-boxes-stacked"></i><span>Inventario</span></label>
+            <label class="diag-opt" data-val="2" data-area="equipo"><input type="radio" name="q3" value="2"><i class="fas fa-users"></i><span>Equipo</span></label>
+            <label class="diag-opt" data-val="2" data-area="datos"><input type="radio" name="q3" value="2"><i class="fas fa-database"></i><span>Datos</span></label>
+          </div>
+          <button class="btn-diag-next" onclick="diagNext(3)" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="diag-q" data-q="4">
+          <h3>¿Tu empresa tiene procesos documentados?</h3>
+          <div class="diag-options">
+            <label class="diag-opt" data-val="4"><input type="radio" name="q4" value="4"><i class="fas fa-file-circle-check"></i><span>Sí, claros y actualizados</span></label>
+            <label class="diag-opt" data-val="3"><input type="radio" name="q4" value="3"><i class="fas fa-file-lines"></i><span>Algunos procesos</span></label>
+            <label class="diag-opt" data-val="2"><input type="radio" name="q4" value="2"><i class="fas fa-file-circle-minus"></i><span>Muy pocos</span></label>
+            <label class="diag-opt" data-val="1"><input type="radio" name="q4" value="1"><i class="fas fa-file-circle-xmark"></i><span>No tenemos documentados</span></label>
+          </div>
+          <button class="btn-diag-next" onclick="diagNext(4)" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="diag-q" data-q="5">
+          <h3>¿Qué tan dependiente es tu empresa del dueño o gerente?</h3>
+          <div class="diag-options">
+            <label class="diag-opt" data-val="4"><input type="radio" name="q5" value="4"><i class="fas fa-circle-check"></i><span>Poco — el equipo opera con autonomía</span></label>
+            <label class="diag-opt" data-val="3"><input type="radio" name="q5" value="3"><i class="fas fa-circle-half-stroke"></i><span>Medio — algunas decisiones las toma solo el gerente</span></label>
+            <label class="diag-opt" data-val="2"><input type="radio" name="q5" value="2"><i class="fas fa-triangle-exclamation"></i><span>Alto — muchas cosas requieren aprobación</span></label>
+            <label class="diag-opt" data-val="1"><input type="radio" name="q5" value="1"><i class="fas fa-circle-xmark"></i><span>Todo pasa por la gerencia — sin ella nada avanza</span></label>
+          </div>
+          <button class="btn-diag-next" onclick="diagNext(5)" disabled>Ver mi resultado <i class="fas fa-chart-line"></i></button>
+        </div>
+
+      </div><!-- /diagQuestions -->
+
+      <!-- Resultado del diagnóstico -->
+      <div class="diag-result" id="diagResult">
+        <div class="diag-result-icon" id="diagResultIcon"></div>
+        <h3 id="diagResultTitle"></h3>
+        <p id="diagResultDesc"></p>
+        <div class="diag-score">
+          Puntaje: <strong id="diagScore"></strong> / 17
+        </div>
+        <div class="diag-result-btns">
+          <a href="#contacto" class="btn-primary">
+            <i class="fas fa-calendar-check"></i> Agendar diagnóstico personalizado
+          </a>
+          <button class="btn-outline" onclick="restartDiag()">
+            <i class="fas fa-rotate-left"></i> Reiniciar
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /diag-widget -->
+  </div>
+</section>
+
+
+<!-- ================================================================
+     CALCULADORA DE PÉRDIDA POR DESORDEN
+     ================================================================ -->
+<section id="calculadora" class="section section--dark">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">Herramienta de conciencia</span>
+      <h2 class="section-title">Calculadora de pérdida<br><span class="text-gold">por desorden operativo</span></h2>
+      <p class="section-sub">Estima cuánto puede estar costándote cada mes la falta de procesos, datos y automatización.</p>
+    </div>
+
+    <div class="calc-widget" data-animate="fade-up">
+      <div class="calc-form">
+        <div class="calc-field">
+          <label for="cVentas"><i class="fas fa-chart-line"></i> Ventas mensuales aproximadas (COP)</label>
+          <input type="number" id="cVentas" placeholder="Ej: 50000000" min="0">
+        </div>
+        <div class="calc-field">
+          <label for="cEmpleados"><i class="fas fa-users"></i> Número de empleados</label>
+          <input type="number" id="cEmpleados" placeholder="Ej: 15" min="1">
+        </div>
+        <div class="calc-field">
+          <label for="cHoras"><i class="fas fa-clock"></i> Horas semanales en reportes manuales</label>
+          <input type="number" id="cHoras" placeholder="Ej: 8" min="0">
+        </div>
+        <div class="calc-field">
+          <label for="cReprocesos"><i class="fas fa-rotate"></i> % estimado de reprocesos o errores</label>
+          <input type="number" id="cReprocesos" placeholder="Ej: 10" min="0" max="100">
+        </div>
+        <div class="calc-field">
+          <label for="cLeads"><i class="fas fa-user-plus"></i> Leads mensuales sin seguimiento</label>
+          <input type="number" id="cLeads" placeholder="Ej: 20" min="0">
+        </div>
+        <button class="btn-primary" onclick="calcularPerdida()">
+          <i class="fas fa-calculator"></i> Calcular estimado
+        </button>
+      </div>
+
+      <div class="calc-result" id="calcResult">
+        <h3><i class="fas fa-triangle-exclamation"></i> Estimado de pérdida mensual</h3>
+        <div class="calc-items">
+          <div class="calc-item">
+            <span>Ineficiencia operativa general</span>
+            <strong id="rInef">$0</strong>
+          </div>
+          <div class="calc-item">
+            <span>Tiempo en reportes manuales</span>
+            <strong id="rRep">$0</strong>
+          </div>
+          <div class="calc-item">
+            <span>Costo de reprocesos y errores</span>
+            <strong id="rRep2">$0</strong>
+          </div>
+          <div class="calc-item">
+            <span>Oportunidades perdidas (leads)</span>
+            <strong id="rLeads">$0</strong>
+          </div>
+        </div>
+        <div class="calc-total">
+          <span>Pérdida mensual estimada</span>
+          <strong id="rTotal">$0</strong>
+        </div>
+        <p class="calc-note">
+          <i class="fas fa-circle-info"></i>
+          Este cálculo es una estimación orientativa. Un diagnóstico permite identificar fugas reales y priorizar soluciones con precisión.
+        </p>
+        <a href="#contacto" class="btn-primary">
+          <i class="fas fa-magnifying-glass-chart"></i> Quiero identificar fugas en mi empresa
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     INDUSTRIAS — Casos por sector
+     ================================================================ -->
+<section id="industrias" class="section section--light">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">Aplicación por sector</span>
+      <h2 class="section-title section-title--dark">Resultados probados en <span class="text-gold">tu industria</span></h2>
+      <p class="section-sub section-sub--dark">Metodologías adaptadas a las realidades de cada tipo de negocio colombiano.</p>
+    </div>
+
+    <div class="industries-grid" data-animate="fade-up">
+      <div class="industry-card">
+        <div class="ind-icon"><i class="fas fa-store"></i></div>
+        <h3>Retail y Puntos de Venta</h3>
+        <p>Control de inventario en tiempo real, análisis de rentabilidad por punto de venta y dashboards de desempeño multitienda.</p>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon"><i class="fas fa-shirt"></i></div>
+        <h3>Industria Textil</h3>
+        <p>Control de órdenes, trazabilidad de materias primas, seguimiento de colecciones y análisis de márgenes por línea.</p>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon"><i class="fas fa-industry"></i></div>
+        <h3>Manufactura y Producción</h3>
+        <p>OEE, eficiencia de planta, control de calidad, costos de producción y dashboards de planta en tiempo real.</p>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon"><i class="fas fa-briefcase"></i></div>
+        <h3>Servicios Premium</h3>
+        <p>Tasa de retención, facturación recurrente, pipeline de proyectos y métricas de calidad del servicio al cliente.</p>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon"><i class="fas fa-bag-shopping"></i></div>
+        <h3>E-commerce</h3>
+        <p>Integración de plataformas, análisis de conversión, gestión de inventario multicanal y rentabilidad por canal.</p>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon"><i class="fas fa-house-chimney-user"></i></div>
+        <h3>Empresas Familiares</h3>
+        <p>Separación empresa-familia, profesionalización de la gestión, gobierno corporativo y sucesión planificada.</p>
+      </div>
+      <div class="industry-card">
+        <div class="ind-icon"><i class="fas fa-map-location-dot"></i></div>
+        <h3>Multilocal y Franquicias</h3>
+        <p>Estandarización entre sedes, tablero comparativo de desempeño, procesos replicables y control centralizado.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     RECURSOS DESCARGABLES — Captura de leads
+     ================================================================ -->
+<section id="recursos" class="section section--dark">
+  <div class="container">
+
+    <div class="section-head" data-animate="fade-up">
+      <span class="section-tag">Recursos gratuitos</span>
+      <h2 class="section-title">Herramientas para empezar a<br><span class="text-gold">ordenar tu empresa hoy</span></h2>
+      <p class="section-sub">Descarga gratis. Solo valor real para el empresario colombiano.</p>
+    </div>
+
+    <div class="resources-grid" data-animate="fade-up">
+
+      <div class="resource-card">
+        <div class="res-icon"><i class="fas fa-list-check"></i></div>
+        <div class="res-body">
+          <span class="res-type">Checklist</span>
+          <h3>Diagnóstico empresarial de 50 puntos</h3>
+          <p>Evalúa el estado actual de tu empresa en 5 áreas críticas.</p>
+        </div>
+        <!-- TODO: Cambia "#" por el enlace real a tu archivo (Google Drive, PDF, etc.) -->
+        <button class="btn-resource" onclick="openResourceModal('checklist')">
+          <i class="fas fa-download"></i> Descargar gratis
+        </button>
+      </div>
+
+      <div class="resource-card">
+        <div class="res-icon"><i class="fas fa-table-columns"></i></div>
+        <div class="res-body">
+          <span class="res-type">Plantilla</span>
+          <h3>Plantilla de KPIs para pymes</h3>
+          <p>20 indicadores clave listos para Excel o Google Sheets.</p>
+        </div>
+        <!-- TODO: Cambia "#" por el enlace real a tu archivo -->
+        <button class="btn-resource" onclick="openResourceModal('kpi')">
+          <i class="fas fa-download"></i> Descargar gratis
+        </button>
+      </div>
+
+      <div class="resource-card">
+        <div class="res-icon"><i class="fas fa-chart-bar"></i></div>
+        <div class="res-body">
+          <span class="res-type">Guía</span>
+          <h3>¿Necesita mi empresa un dashboard?</h3>
+          <p>7 señales claras de que ya es momento de implementar BI.</p>
+        </div>
+        <!-- TODO: Cambia "#" por el enlace real -->
+        <button class="btn-resource" onclick="openResourceModal('dashboard')">
+          <i class="fas fa-download"></i> Descargar gratis
+        </button>
+      </div>
+
+      <div class="resource-card">
+        <div class="res-icon"><i class="fas fa-diagram-project"></i></div>
+        <div class="res-body">
+          <span class="res-type">Herramienta</span>
+          <h3>Matriz de priorización de procesos</h3>
+          <p>Define qué procesos optimizar primero por impacto y riesgo.</p>
+        </div>
+        <!-- TODO: Cambia "#" por el enlace real -->
+        <button class="btn-resource" onclick="openResourceModal('matriz')">
+          <i class="fas fa-download"></i> Descargar gratis
+        </button>
+      </div>
+
+      <div class="resource-card">
+        <div class="res-icon"><i class="fas fa-people-group"></i></div>
+        <div class="res-body">
+          <span class="res-type">Guía</span>
+          <h3>Reuniones gerenciales efectivas</h3>
+          <p>Estructura y agenda para convertir reuniones en decisiones.</p>
+        </div>
+        <!-- TODO: Cambia "#" por el enlace real -->
+        <button class="btn-resource" onclick="openResourceModal('reuniones')">
+          <i class="fas fa-download"></i> Descargar gratis
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Modal de captura para recursos (requiere email) -->
+<div class="modal-overlay" id="resourceModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeResourceModal()"><i class="fas fa-xmark"></i></button>
+    <div class="modal-icon"><i class="fas fa-download"></i></div>
+    <h3>Recibir recurso gratuito</h3>
+    <p>Déjanos tu correo y te lo enviamos de inmediato.</p>
+    <form onsubmit="submitResourceForm(event)">
+      <input type="text" placeholder="Tu nombre" required id="resName">
+      <input type="email" placeholder="Correo electrónico" required id="resEmail">
+      <button type="submit" class="btn-primary">
+        <i class="fas fa-paper-plane"></i> Enviar y recibir
+      </button>
+    </form>
+    <p class="modal-note"><i class="fas fa-lock"></i> Sin spam. Confidencial.</p>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     CONTACTO — Formulario premium
+     ================================================================ -->
+<section id="contacto" class="section section--contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Columna izquierda: info -->
+      <div class="contact-info" data-animate="fade-right">
+        <span class="section-tag">Hablemos</span>
+        <h2 class="section-title">El primer paso es<br><span class="text-gold">el diagnóstico</span></h2>
+        <p class="contact-desc">
+          Cuéntanos sobre tu empresa. Revisamos tu caso y en 24–48 horas confirmamos si hay una oportunidad de trabajo conjunto y agendamos una sesión sin costo.
+        </p>
+
+        <div class="contact-details">
+          <div class="cd-item">
+            <div class="cd-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <strong>Correo</strong>
+              <!-- TODO: Reemplaza con tu correo real -->
+              <span>Felipebautista@loselegidoscolombia.com</span>
+            </div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <strong>WhatsApp</strong>
+              <!-- TODO: Reemplaza con tu número real -->
+              <span>+57 317 370 0578</span>
+            </div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-icon"><i class="fas fa-location-dot"></i></div>
+            <div>
+              <strong>Ubicación</strong>
+              <span>Bogotá, Colombia · Atención virtual disponible</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-social">
+          <!-- TODO: Reemplaza href="#" con tus URLs reales de redes sociales -->
+          <a href="#" class="soc-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="soc-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Columna derecha: formulario -->
+      <div class="contact-form-wrap" data-animate="fade-left">
+        <form id="contactForm" class="contact-form" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fNombre">Nombre *</label>
+              <input type="text" id="fNombre" name="nombre" placeholder="Tu nombre completo" required>
+              <span class="form-err">Campo requerido</span>
+            </div>
+            <div class="form-group">
+              <label for="fEmpresa">Empresa *</label>
+              <input type="text" id="fEmpresa" name="empresa" placeholder="Nombre de tu empresa" required>
+              <span class="form-err">Campo requerido</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fCargo">Cargo *</label>
+              <input type="text" id="fCargo" name="cargo" placeholder="Gerente, Director, Dueño..." required>
+              <span class="form-err">Campo requerido</span>
+            </div>
+            <div class="form-group">
+              <label for="fWA">WhatsApp *</label>
+              <input type="tel" id="fWA" name="whatsapp" placeholder="+57 317 370 0578" required>
+              <span class="form-err">Número requerido</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fEmail">Correo electrónico *</label>
+            <input type="email" id="fEmail" name="email" placeholder="correo@tuempresa.com" required>
+            <span class="form-err">Correo inválido</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fIndustria">Industria</label>
+              <select id="fIndustria" name="industria">
+                <option value="">Selecciona tu sector</option>
+                <option>Retail / Puntos de venta</option>
+                <option>Manufactura</option>
+                <option>Textil</option>
+                <option>Servicios</option>
+                <option>E-commerce</option>
+                <option>Empresa familiar</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fEmpleados">Número de empleados</label>
+              <select id="fEmpleados" name="empleados">
+                <option value="">Selecciona</option>
+                <option>1 – 10</option>
+                <option>11 – 30</option>
+                <option>31 – 80</option>
+                <option>81 – 200</option>
+                <option>Más de 200</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fDolor">Dolor principal</label>
+              <select id="fDolor" name="dolor">
+                <option value="">¿Cuál es tu mayor reto?</option>
+                <option>Falta de datos y visibilidad</option>
+                <option>Procesos desorganizados</option>
+                <option>Ventas sin seguimiento</option>
+                <option>Control financiero deficiente</option>
+                <option>Dependencia del gerente o dueño</option>
+                <option>Quiero escalar pero sin estructura</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fServicio">Servicio de interés</label>
+              <select id="fServicio" name="servicio">
+                <option value="">¿Qué te interesa más?</option>
+                <option>Consultoría estratégica</option>
+                <option>Business Intelligence / DataWorld</option>
+                <option>Automatización e IA</option>
+                <option>Programa Empresa Escalable</option>
+                <option>Procesos y estandarización</option>
+                <option>Control financiero</option>
+                <option>No sé, quiero el diagnóstico</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fMensaje">Cuéntanos sobre tu empresa</label>
+            <textarea id="fMensaje" name="mensaje" rows="4"
+              placeholder="¿Cuál es el principal reto que quieres resolver? ¿Qué esperas lograr?"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary btn-large">
+            <i class="fas fa-paper-plane"></i> Enviar solicitud de diagnóstico
+          </button>
+          <p class="form-note"><i class="fas fa-lock"></i> Tu información es confidencial. Sin spam.</p>
+
+        </form>
+
+        <!-- Mensaje de éxito tras enviar (oculto por defecto) -->
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon"><i class="fas fa-circle-check"></i></div>
+          <h3>¡Mensaje recibido!</h3>
+          <p>Gracias. Hemos recibido tu información. El siguiente paso es revisar tu caso y agendar un diagnóstico. Te contactamos en 24–48 horas.</p>
+          <a href="#inicio" class="btn-outline">Volver al inicio</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-main">Los Elegidos</span><span class="logo-sub">Colombia</span>
+        </div>
+        <p class="footer-tagline">"Estrategia, datos y ejecución para empresas que quieren crecer con control."</p>
+        <div class="footer-social">
+          <!-- TODO: Reemplaza href="#" con tus URLs reales -->
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="dw-footer-badge">
+          <i class="fas fa-database"></i>
+          <div>
+            <strong>DataWorld</strong>
+            <span>Unidad de inteligencia de datos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#metodo">Método</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#dataworld">DataWorld</a></li>
+          <li><a href="#diagnostico">Diagnóstico</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Consultoría Estratégica</a></li>
+          <li><a href="#servicios">Procesos y Estandarización</a></li>
+          <li><a href="#dataworld">Business Intelligence</a></li>
+          <li><a href="#servicios">Automatización e IA</a></li>
+          <li><a href="#servicios">Dirección Comercial</a></li>
+          <li><a href="#programa">Empresa Escalable</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact-info">
+        <h4>Contacto</h4>
+        <ul>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <!-- TODO: Reemplaza con tu correo real -->
+            <span>Felipebautista@loselegidoscolombia.com</span>
+          </li>
+          <li>
+            <i class="fab fa-whatsapp"></i>
+            <!-- TODO: Reemplaza con tu número real -->
+            <span>+57 317 370 0578</span>
+          </li>
+          <li>
+            <i class="fas fa-location-dot"></i>
+            <span>Bogotá, Colombia</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© 2026 Los Elegidos Colombia · Todos los derechos reservados</p>
+      <p class="footer-dw">DataWorld · Unidad de Business Intelligence</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ================================================================
+     BOTÓN FLOTANTE WHATSAPP
+     TODO: Cambia "57XXXXXXXXXX" por tu número real (ej: 573001234567)
+     El formato es: código país + número sin el +
+     ================================================================ -->
+<a href="https://wa.me/573173700578?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20Los%20Elegidos%20Colombia"
+   class="wa-float"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Hablar por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-label">Hablar por WhatsApp</span>
+</a>
+
+<!-- Botón volver arriba -->
+<button class="back-top" id="backTop" aria-label="Volver arriba"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+
+<!-- JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
