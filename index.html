@@ -14,6 +14,14 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="diagnostico.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -44,7 +52,7 @@
       <li><a href="#contacto" class="nav-link">Contacto</a></li>
     </ul>
 
-    <a href="#diagnostico" class="btn-nav">Solicitar diagnóstico</a>
+    <button class="btn-nav" data-open-diag>Solicitar diagnóstico</button>
 
     <!-- Hamburger: 3 barras que se convierten en X en móvil -->
     <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -86,9 +94,9 @@
       </p>
 
       <div class="hero-btns">
-        <a href="#diagnostico" class="btn-primary">
+        <button class="btn-primary" data-open-diag>
           <i class="fas fa-chart-line"></i> Solicitar diagnóstico
-        </a>
+        </button>
         <a href="#metodo" class="btn-outline-light">
           Conocer el método <i class="fas fa-arrow-right"></i>
         </a>
@@ -265,7 +273,7 @@
         El problema no siempre es vender más. Muchas veces el verdadero reto es construir
         un sistema que pueda <strong>sostener el crecimiento.</strong>
       </blockquote>
-      <a href="#diagnostico" class="btn-primary btn-sm">Diagnosticar mi empresa</a>
+      <button class="btn-primary btn-sm" data-open-diag>Diagnosticar mi empresa</button>
     </div>
 
   </div>
@@ -411,9 +419,9 @@
     </div><!-- /timeline -->
 
     <div class="section-cta" data-animate="fade-up">
-      <a href="#diagnostico" class="btn-primary">
+      <button class="btn-primary" data-open-diag>
         <i class="fas fa-rocket"></i> Quiero empezar con un diagnóstico
-      </a>
+      </button>
     </div>
 
   </div>
@@ -651,106 +659,65 @@
 
 
 <!-- ================================================================
-     DIAGNÓSTICO INTERACTIVO
+     DIAGNÓSTICO — Módulo de madurez empresarial
      ================================================================ -->
 <section id="diagnostico" class="section section--mid">
   <div class="container">
 
     <div class="section-head" data-animate="fade-up">
       <span class="section-tag">Herramienta gratuita</span>
-      <h2 class="section-title">Diagnóstico <span class="text-gold">empresarial</span></h2>
-      <p class="section-sub">5 preguntas para entender el estado actual de tu empresa y recibir una recomendación.</p>
+      <h2 class="section-title">Diagnóstico de <span class="text-gold">Madurez Empresarial</span></h2>
+      <p class="section-sub">
+        Evalúa tu empresa en 8 áreas críticas, obtén tu mapa de madurez con gráfico radar
+        y descarga un reporte PDF personalizado. Completamente gratis.
+      </p>
     </div>
 
-    <div class="diag-widget" data-animate="fade-up">
+    <div class="diag-launch-card" data-animate="fade-up">
 
-      <!-- Barra de progreso -->
-      <div class="diag-progress" id="diagProgress">
-        <div class="diag-progress-bar" id="diagBar"></div>
-        <span class="diag-progress-text" id="diagProgressText">Pregunta 1 de 5</span>
+      <div class="diag-launch-areas">
+        <div class="dla-item"><i class="fas fa-chess-king" style="color:#c9a84c"></i><span>Estrategia</span></div>
+        <div class="dla-item"><i class="fas fa-coins" style="color:#3b6bfa"></i><span>Finanzas</span></div>
+        <div class="dla-item"><i class="fas fa-chart-line" style="color:#00d4ff"></i><span>Ventas</span></div>
+        <div class="dla-item"><i class="fas fa-gears" style="color:#8b5cf6"></i><span>Operaciones</span></div>
+        <div class="dla-item"><i class="fas fa-users" style="color:#10b981"></i><span>Talento</span></div>
+        <div class="dla-item"><i class="fas fa-microchip" style="color:#f59e0b"></i><span>Tecnología</span></div>
+        <div class="dla-item"><i class="fas fa-chart-pie" style="color:#ef4444"></i><span>Indicadores</span></div>
+        <div class="dla-item"><i class="fas fa-star" style="color:#06b6d4"></i><span>Clientes</span></div>
       </div>
 
-      <!-- Preguntas -->
-      <div id="diagQuestions">
-
-        <div class="diag-q active" data-q="1">
-          <h3>¿Dónde vive hoy la mayor parte de la información de tu empresa?</h3>
-          <div class="diag-options">
-            <label class="diag-opt" data-val="2"><input type="radio" name="q1" value="2"><i class="fas fa-table"></i><span>Excel y hojas de cálculo</span></label>
-            <label class="diag-opt" data-val="1"><input type="radio" name="q1" value="1"><i class="fab fa-whatsapp"></i><span>WhatsApp y correos</span></label>
-            <label class="diag-opt" data-val="3"><input type="radio" name="q1" value="3"><i class="fas fa-server"></i><span>ERP o POS centralizado</span></label>
-            <label class="diag-opt" data-val="1"><input type="radio" name="q1" value="1"><i class="fas fa-plug-circle-xmark"></i><span>Varias fuentes desconectadas</span></label>
-          </div>
-          <button class="btn-diag-next" onclick="diagNext(1)" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+      <div class="diag-launch-stats">
+        <div class="dls-item">
+          <strong>40</strong>
+          <span>Preguntas</span>
         </div>
-
-        <div class="diag-q" data-q="2">
-          <h3>¿Con qué frecuencia revisas indicadores reales de tu empresa?</h3>
-          <div class="diag-options">
-            <label class="diag-opt" data-val="4"><input type="radio" name="q2" value="4"><i class="fas fa-calendar-day"></i><span>Todos los días</span></label>
-            <label class="diag-opt" data-val="3"><input type="radio" name="q2" value="3"><i class="fas fa-calendar-week"></i><span>Cada semana</span></label>
-            <label class="diag-opt" data-val="2"><input type="radio" name="q2" value="2"><i class="fas fa-calendar-days"></i><span>Cada mes</span></label>
-            <label class="diag-opt" data-val="1"><input type="radio" name="q2" value="1"><i class="fas fa-calendar-xmark"></i><span>Casi nunca</span></label>
-          </div>
-          <button class="btn-diag-next" onclick="diagNext(2)" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+        <div class="dls-sep"></div>
+        <div class="dls-item">
+          <strong>8</strong>
+          <span>Áreas críticas</span>
         </div>
-
-        <div class="diag-q" data-q="3">
-          <h3>¿Qué área te genera mayor dolor hoy en tu empresa?</h3>
-          <div class="diag-options diag-options--3col">
-            <label class="diag-opt" data-val="2" data-area="ventas"><input type="radio" name="q3" value="2"><i class="fas fa-chart-line"></i><span>Ventas</span></label>
-            <label class="diag-opt" data-val="2" data-area="finanzas"><input type="radio" name="q3" value="2"><i class="fas fa-coins"></i><span>Finanzas</span></label>
-            <label class="diag-opt" data-val="2" data-area="operación"><input type="radio" name="q3" value="2"><i class="fas fa-gears"></i><span>Operación</span></label>
-            <label class="diag-opt" data-val="2" data-area="inventario"><input type="radio" name="q3" value="2"><i class="fas fa-boxes-stacked"></i><span>Inventario</span></label>
-            <label class="diag-opt" data-val="2" data-area="equipo"><input type="radio" name="q3" value="2"><i class="fas fa-users"></i><span>Equipo</span></label>
-            <label class="diag-opt" data-val="2" data-area="datos"><input type="radio" name="q3" value="2"><i class="fas fa-database"></i><span>Datos</span></label>
-          </div>
-          <button class="btn-diag-next" onclick="diagNext(3)" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+        <div class="dls-sep"></div>
+        <div class="dls-item">
+          <strong>~12</strong>
+          <span>Minutos</span>
         </div>
-
-        <div class="diag-q" data-q="4">
-          <h3>¿Tu empresa tiene procesos documentados?</h3>
-          <div class="diag-options">
-            <label class="diag-opt" data-val="4"><input type="radio" name="q4" value="4"><i class="fas fa-file-circle-check"></i><span>Sí, claros y actualizados</span></label>
-            <label class="diag-opt" data-val="3"><input type="radio" name="q4" value="3"><i class="fas fa-file-lines"></i><span>Algunos procesos</span></label>
-            <label class="diag-opt" data-val="2"><input type="radio" name="q4" value="2"><i class="fas fa-file-circle-minus"></i><span>Muy pocos</span></label>
-            <label class="diag-opt" data-val="1"><input type="radio" name="q4" value="1"><i class="fas fa-file-circle-xmark"></i><span>No tenemos documentados</span></label>
-          </div>
-          <button class="btn-diag-next" onclick="diagNext(4)" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
-        </div>
-
-        <div class="diag-q" data-q="5">
-          <h3>¿Qué tan dependiente es tu empresa del dueño o gerente?</h3>
-          <div class="diag-options">
-            <label class="diag-opt" data-val="4"><input type="radio" name="q5" value="4"><i class="fas fa-circle-check"></i><span>Poco — el equipo opera con autonomía</span></label>
-            <label class="diag-opt" data-val="3"><input type="radio" name="q5" value="3"><i class="fas fa-circle-half-stroke"></i><span>Medio — algunas decisiones las toma solo el gerente</span></label>
-            <label class="diag-opt" data-val="2"><input type="radio" name="q5" value="2"><i class="fas fa-triangle-exclamation"></i><span>Alto — muchas cosas requieren aprobación</span></label>
-            <label class="diag-opt" data-val="1"><input type="radio" name="q5" value="1"><i class="fas fa-circle-xmark"></i><span>Todo pasa por la gerencia — sin ella nada avanza</span></label>
-          </div>
-          <button class="btn-diag-next" onclick="diagNext(5)" disabled>Ver mi resultado <i class="fas fa-chart-line"></i></button>
-        </div>
-
-      </div><!-- /diagQuestions -->
-
-      <!-- Resultado del diagnóstico -->
-      <div class="diag-result" id="diagResult">
-        <div class="diag-result-icon" id="diagResultIcon"></div>
-        <h3 id="diagResultTitle"></h3>
-        <p id="diagResultDesc"></p>
-        <div class="diag-score">
-          Puntaje: <strong id="diagScore"></strong> / 17
-        </div>
-        <div class="diag-result-btns">
-          <a href="#contacto" class="btn-primary">
-            <i class="fas fa-calendar-check"></i> Agendar diagnóstico personalizado
-          </a>
-          <button class="btn-outline" onclick="restartDiag()">
-            <i class="fas fa-rotate-left"></i> Reiniciar
-          </button>
+        <div class="dls-sep"></div>
+        <div class="dls-item">
+          <strong>PDF</strong>
+          <span>Incluido</span>
         </div>
       </div>
 
-    </div><!-- /diag-widget -->
+      <button class="btn-primary btn-large" data-open-diag>
+        <i class="fas fa-chart-line"></i> Iniciar diagnóstico gratuito
+      </button>
+
+      <p class="diag-launch-note">
+        <i class="fas fa-lock"></i> Sin registro previo. Confidencial. Sin spam.
+      </p>
+
+    </div>
+
   </div>
 </section>
 
@@ -1261,7 +1228,43 @@
 </button>
 
 
+<!-- ================================================================
+     MODAL — DIAGNÓSTICO DE MADUREZ EMPRESARIAL
+     ================================================================ -->
+<div class="diag-overlay" id="diagOverlay">
+  <div class="diag-modal" id="diagModal">
+
+    <!-- Topbar fija con barra de progreso -->
+    <div class="diag-topbar">
+      <div class="diag-topbar-brand">
+        <img
+          src="images/Logo_Elegidos.png"
+          alt="Los Elegidos Colombia"
+          class="diag-topbar-logo"
+          onerror="this.style.display='none'"
+        >
+        <span>Diagnóstico Empresarial</span>
+      </div>
+      <div class="diag-topbar-progress">
+        <div class="diag-progressbar">
+          <div class="diag-progressbar-fill" id="diagProgressFill"></div>
+        </div>
+        <span class="diag-step-label" id="diagStepLabel">Inicio</span>
+      </div>
+      <button class="diag-close-btn" id="diagCloseBtn" aria-label="Cerrar diagnóstico">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Contenido dinámico renderizado por diagnostico.js -->
+    <div class="diag-content" id="diagContent"></div>
+
+  </div>
+</div>
+
+
 <!-- JavaScript -->
 <script src="script.js"></script>
+<script src="diagnostico.js"></script>
 </body>
 </html>
