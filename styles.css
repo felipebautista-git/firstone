@@ -248,51 +248,74 @@ input, select, textarea { font-family: var(--sans); }
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 2.5rem;
-  height: 90px;
+  height: 86px;
   display: flex;
   align-items: center;
   gap: 2rem;
+  transition: height 0.35s ease;
 }
 
 .nav-logo {
   display: flex;
   align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+/* Isotipo (ícono) */
+.nav-logo-iso {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 10px rgba(201,168,76,0.35));
+  transition: height 0.35s ease, opacity var(--tr);
   flex-shrink: 0;
 }
 
-/* Logo imagen en el navbar */
-.nav-logo-img {
-  height: 70px;
-  width: auto;
-  max-width: 220px;
-  object-fit: contain;
-  display: block;
-  /* screen: los píxeles negros desaparecen, el dorado permanece */
-  mix-blend-mode: screen;
-  transition: opacity var(--tr), transform var(--tr);
-  filter: drop-shadow(0 2px 12px rgba(201,168,76,0.25));
-}
-.nav-logo-img:hover {
-  opacity: 0.9;
-  transform: scale(1.03);
+.nav-logo:hover .nav-logo-iso {
+  opacity: 0.85;
 }
 
-/* Fallback en texto (visible solo si la imagen no carga) */
+/* Wordmark */
 .nav-logo-text {
+  display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  gap: 2px;
+  line-height: 1;
 }
+
 .logo-main {
   font-family: var(--display);
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 700;
   color: var(--gold);
+  white-space: nowrap;
+  transition: font-size 0.35s ease, color var(--tr);
+  letter-spacing: 0.01em;
 }
+
 .logo-sub {
-  font-size: 0.65rem;
-  letter-spacing: 3px;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 3.5px;
   text-transform: uppercase;
-  color: var(--t2);
+  color: var(--t3);
+  white-space: nowrap;
+  transition: opacity 0.35s ease, letter-spacing 0.35s ease, color var(--tr);
+}
+
+.nav-logo:hover .logo-main { color: var(--gold-light); }
+
+/* ── Shrink al hacer scroll ── */
+#navbar.scrolled .nav-inner  { height: 62px; }
+#navbar.scrolled .nav-logo-iso { height: 28px; }
+#navbar.scrolled .logo-main    { font-size: 1rem; }
+#navbar.scrolled .logo-sub     {
+  opacity: 0.55;
+  letter-spacing: 2.5px;
 }
 
 .nav-links {
@@ -352,7 +375,7 @@ input, select, textarea { font-family: var(--sans); }
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding-top: 90px;
+  padding-top: 86px;
 }
 
 /* Fondo con patrón de grid */
@@ -1777,8 +1800,12 @@ input, select, textarea { font-family: var(--sans); }
   /* Nav móvil */
   .btn-nav { display: none; }
   .hamburger { display: flex; margin-left: auto; }
-  .nav-logo-img { height: 54px; max-width: 170px; }
-  .nav-inner { height: 74px; padding: 0 1.5rem; }
+  .nav-logo-iso { height: 32px; }
+  .logo-main { font-size: 1rem; }
+  .logo-sub { font-size: 0.55rem; letter-spacing: 2.5px; }
+  .nav-inner { height: 68px; padding: 0 1.5rem; }
+  #navbar.scrolled .nav-inner { height: 56px; }
+  #navbar.scrolled .nav-logo-iso { height: 24px; }
 
   .nav-links {
     position: fixed;
