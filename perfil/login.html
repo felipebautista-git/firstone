@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso privado · Los Elegidos Colombia</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="perfil.css">
+</head>
+<body>
+
+<div class="perfil-bg"></div>
+
+<main class="login-page">
+
+  <a href="../index.html" class="login-back">
+    <i class="fas fa-arrow-left"></i> Volver al sitio
+  </a>
+
+  <div class="login-card">
+
+    <div class="login-brand">
+      <img
+        src="../images/IsoTipo_Elegidos.png"
+        alt="Los Elegidos Colombia"
+        class="login-iso"
+        onerror="this.style.display='none';"
+      >
+      <span class="login-brand-name">Los Elegidos</span>
+      <span class="login-brand-sub">Colombia</span>
+    </div>
+
+    <div class="login-title">
+      <span>Acceso privado</span>
+    </div>
+
+    <form class="login-form" id="loginForm" novalidate>
+
+      <div class="login-field">
+        <label for="lUser"><i class="fas fa-user" style="margin-right:5px;font-size:.7rem"></i> Usuario</label>
+        <div class="input-wrap">
+          <i class="fas fa-user field-icon"></i>
+          <input
+            type="text"
+            id="lUser"
+            placeholder="Tu usuario"
+            autocomplete="username"
+            spellcheck="false"
+          >
+        </div>
+      </div>
+
+      <div class="login-field">
+        <label for="lPass"><i class="fas fa-lock" style="margin-right:5px;font-size:.7rem"></i> Contraseña</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock field-icon"></i>
+          <input
+            type="password"
+            id="lPass"
+            placeholder="Tu contraseña"
+            autocomplete="current-password"
+          >
+          <button type="button" class="pass-toggle" id="passToggle" aria-label="Mostrar contraseña">
+            <i class="fas fa-eye" id="passToggleIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="login-error" id="loginError">
+        <i class="fas fa-triangle-exclamation"></i>
+        <span>Usuario o contraseña incorrectos.</span>
+      </div>
+
+      <button type="submit" class="btn-login" id="btnLogin">
+        <i class="fas fa-unlock-keyhole"></i> Ingresar
+      </button>
+
+    </form>
+
+    <p class="login-footer">
+      <i class="fas fa-shield-halved"></i>
+      Sesión cifrada · Acceso exclusivo
+    </p>
+
+  </div>
+
+</main>
+
+<script src="auth.js"></script>
+<script>
+  // Redirigir si ya está autenticado
+  if (AUTH.isAuthenticated()) {
+    window.location.href = 'dashboard.html';
+  }
+
+  // Toggle contraseña
+  document.getElementById('passToggle').addEventListener('click', () => {
+    const input = document.getElementById('lPass');
+    const icon  = document.getElementById('passToggleIcon');
+    const show  = input.type === 'password';
+    input.type  = show ? 'text' : 'password';
+    icon.className = show ? 'fas fa-eye-slash' : 'fas fa-eye';
+  });
+
+  // Submit
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn   = document.getElementById('btnLogin');
+    const error = document.getElementById('loginError');
+    const user  = document.getElementById('lUser').value.trim();
+    const pass  = document.getElementById('lPass').value;
+
+    if (!user || !pass) {
+      error.style.display = 'flex';
+      error.querySelector('span').textContent = 'Completa todos los campos.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+    error.style.display = 'none';
+
+    try {
+      const ok = await AUTH.login(user, pass);
+      if (ok) {
+        AUTH.setSession();
+        btn.innerHTML = '<i class="fas fa-check"></i> Acceso concedido';
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 500);
+      } else {
+        error.style.display = 'flex';
+        error.querySelector('span').textContent = 'Usuario o contraseña incorrectos.';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-unlock-keyhole"></i> Ingresar';
+        document.getElementById('lPass').value = '';
+        document.getElementById('lPass').focus();
+      }
+    } catch {
+      error.style.display = 'flex';
+      error.querySelector('span').textContent = 'Error inesperado. Recarga la página.';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-unlock-keyhole"></i> Ingresar';
+    }
+  });
+
+  // Enter en campo usuario
+  document.getElementById('lUser').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') document.getElementById('lPass').focus();
+  });
+</script>
+</body>
+</html>

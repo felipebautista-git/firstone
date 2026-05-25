@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil Personal · Los Elegidos Colombia</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="perfil.css">
+</head>
+<body>
+
+<div class="perfil-bg"></div>
+
+<!-- ── HEADER ─────────────────────────────────────────── -->
+<header class="dash-header">
+  <div class="dash-header-brand">
+    <img
+      src="../images/IsoTipo_Elegidos.png"
+      alt=""
+      class="dash-header-iso"
+      onerror="this.style.display='none';"
+    >
+    <span>Perfil Personal</span>
+  </div>
+  <div class="dash-header-right">
+    <div class="dash-user-badge">
+      <i class="fas fa-user-shield"></i>
+      <span id="dashUser">felipe</span>
+    </div>
+    <button class="btn-logout" onclick="AUTH.logout()">
+      <i class="fas fa-arrow-right-from-bracket"></i> Salir
+    </button>
+  </div>
+</header>
+
+<!-- ── MAIN ───────────────────────────────────────────── -->
+<main class="dash-main">
+
+  <!-- ACCESOS DIRECTOS -->
+  <section class="dash-section">
+    <div class="dash-section-head">
+      <h2 class="dash-section-title">
+        <i class="fas fa-bolt"></i> Accesos directos
+      </h2>
+      <button class="btn-add" id="btnAddLink">
+        <i class="fas fa-plus"></i> Agregar acceso
+      </button>
+    </div>
+
+    <div class="links-grid" id="linksGrid">
+      <!-- Renderizado por JS -->
+    </div>
+  </section>
+
+</main>
+
+<!-- ── MODAL: AGREGAR / EDITAR ACCESO ─────────────────── -->
+<div class="modal-overlay" id="linkModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3><i class="fas fa-bolt"></i> <span id="modalTitle">Agregar acceso</span></h3>
+      <button class="modal-close-btn" id="modalClose">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="modal-form">
+      <input type="hidden" id="editIndex" value="">
+
+      <div class="modal-field">
+        <label>Nombre *</label>
+        <input type="text" id="mName" placeholder="Ej: GitHub, Google Drive, CRM...">
+      </div>
+      <div class="modal-field">
+        <label>URL *</label>
+        <input type="url" id="mUrl" placeholder="https://...">
+      </div>
+      <div class="modal-field">
+        <label>Ícono (Font Awesome)</label>
+        <input type="text" id="mIcon" placeholder="fa-github, fa-globe, fa-file...">
+      </div>
+      <div class="modal-field">
+        <label>Color del acceso</label>
+        <div class="color-options" id="colorOptions">
+          <!-- Generado por JS -->
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-modal-cancel" id="modalCancel">Cancelar</button>
+        <button class="btn-modal-save" id="modalSave">
+          <i class="fas fa-check"></i> Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="auth.js"></script>
+<script>
+// ── GUARD ───────────────────────────────────────────────
+AUTH.requireAuth();
+document.getElementById('dashUser').textContent = AUTH.getUser() || 'usuario';
+
+// ── COLORES ─────────────────────────────────────────────
+const COLORS = [
+  { name: 'Dorado',   hex: '#c9a84c' },
+  { name: 'Azul',     hex: '#3b6bfa' },
+  { name: 'Cian',     hex: '#00d4ff' },
+  { name: 'Verde',    hex: '#10b981' },
+  { name: 'Violeta',  hex: '#8b5cf6' },
+  { name: 'Naranja',  hex: '#f59e0b' },
+  { name: 'Rojo',     hex: '#ef4444' },
+  { name: 'Rosa',     hex: '#ec4899' },
+];
+
+// ── STORAGE ─────────────────────────────────────────────
+const LINKS_KEY = 'perfil_links';
+
+function loadLinks() {
+  try {
+    const raw = localStorage.getItem(LINKS_KEY);
+    return raw ? JSON.parse(raw) : getDefaultLinks();
+  } catch { return getDefaultLinks(); }
+}
+
+function saveLinks(links) {
+  localStorage.setItem(LINKS_KEY, JSON.stringify(links));
+}
+
+function getDefaultLinks() {
+  return [
+    { name: 'Sitio web',   url: '../index.html',                    icon: 'fa-globe',        color: '#c9a84c' },
+    { name: 'GitHub',      url: 'https://github.com/felipebautista-git', icon: 'fa-github',  color: '#8b5cf6' },
+    { name: 'WhatsApp',    url: 'https://wa.me/573173700578',        icon: 'fa-whatsapp',     color: '#10b981' },
+    { name: 'Correo',      url: 'mailto:Felipebautista@loselegidoscolombia.com', icon: 'fa-envelope', color: '#3b6bfa' },
+  ];
+}
+
+// ── RENDER ──────────────────────────────────────────────
+function renderLinks() {
+  const grid  = document.getElementById('linksGrid');
+  const links = loadLinks();
+
+  if (links.length === 0) {
+    grid.innerHTML = `
+      <div class="links-empty">
+        <i class="fas fa-bolt"></i>
+        <p>No hay accesos directos aún.<br>Haz clic en "Agregar acceso" para empezar.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = links.map((link, i) => `
+    <a
+      href="${escHtml(link.url)}"
+      class="link-card"
+      style="--card-color: ${escHtml(link.color)}"
+      target="${link.url.startsWith('http') ? '_blank' : '_self'}"
+      rel="noopener noreferrer"
+      onclick="handleLinkClick(event, ${i})"
+    >
+      <div class="link-card-icon">
+        <i class="fas ${escHtml(link.icon)}"></i>
+      </div>
+      <div class="link-card-body">
+        <div class="link-card-title">${escHtml(link.name)}</div>
+        <div class="link-card-url">${escHtml(link.url)}</div>
+      </div>
+      <div class="link-card-actions" onclick="event.preventDefault(); event.stopPropagation();">
+        <button class="link-action-btn" onclick="openEditModal(${i})" title="Editar">
+          <i class="fas fa-pen"></i>
+        </button>
+        <button class="link-action-btn delete" onclick="deleteLink(${i})" title="Eliminar">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </a>
+  `).join('');
+}
+
+function handleLinkClick(e, idx) {
+  // Solo navegar si no se hizo clic en los botones de acción
+  if (e.target.closest('.link-card-actions')) e.preventDefault();
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ── ELIMINAR ────────────────────────────────────────────
+function deleteLink(idx) {
+  if (!confirm('¿Eliminar este acceso directo?')) return;
+  const links = loadLinks();
+  links.splice(idx, 1);
+  saveLinks(links);
+  renderLinks();
+}
+
+// ── MODAL ───────────────────────────────────────────────
+let selectedColor = '#c9a84c';
+
+function renderColorOptions(current) {
+  const container = document.getElementById('colorOptions');
+  selectedColor = current || '#c9a84c';
+  container.innerHTML = COLORS.map(c => `
+    <div
+      class="color-opt ${c.hex === selectedColor ? 'selected' : ''}"
+      style="background:${c.hex}"
+      title="${c.name}"
+      onclick="selectColor('${c.hex}', this)"
+    ></div>
+  `).join('');
+}
+
+function selectColor(hex, el) {
+  selectedColor = hex;
+  document.querySelectorAll('.color-opt').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function openAddModal() {
+  document.getElementById('modalTitle').textContent = 'Agregar acceso';
+  document.getElementById('editIndex').value = '';
+  document.getElementById('mName').value = '';
+  document.getElementById('mUrl').value = '';
+  document.getElementById('mIcon').value = 'fa-globe';
+  renderColorOptions('#c9a84c');
+  document.getElementById('linkModal').classList.add('active');
+  setTimeout(() => document.getElementById('mName').focus(), 100);
+}
+
+function openEditModal(idx) {
+  const links = loadLinks();
+  const link  = links[idx];
+  document.getElementById('modalTitle').textContent = 'Editar acceso';
+  document.getElementById('editIndex').value = idx;
+  document.getElementById('mName').value = link.name;
+  document.getElementById('mUrl').value  = link.url;
+  document.getElementById('mIcon').value = link.icon;
+  renderColorOptions(link.color);
+  document.getElementById('linkModal').classList.add('active');
+  setTimeout(() => document.getElementById('mName').focus(), 100);
+}
+
+function closeModal() {
+  document.getElementById('linkModal').classList.remove('active');
+}
+
+function saveLink() {
+  const name = document.getElementById('mName').value.trim();
+  const url  = document.getElementById('mUrl').value.trim();
+  const icon = document.getElementById('mIcon').value.trim() || 'fa-globe';
+  const idx  = document.getElementById('editIndex').value;
+
+  if (!name || !url) {
+    document.getElementById('mName').focus();
+    return;
+  }
+
+  const links = loadLinks();
+  const entry = { name, url, icon, color: selectedColor };
+
+  if (idx !== '') {
+    links[parseInt(idx)] = entry;
+  } else {
+    links.push(entry);
+  }
+
+  saveLinks(links);
+  renderLinks();
+  closeModal();
+}
+
+// ── EVENTOS ─────────────────────────────────────────────
+document.getElementById('btnAddLink').addEventListener('click', openAddModal);
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalCancel').addEventListener('click', closeModal);
+document.getElementById('modalSave').addEventListener('click', saveLink);
+
+document.getElementById('linkModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Enter' && document.getElementById('linkModal').classList.contains('active')) {
+    saveLink();
+  }
+});
+
+// ── INIT ────────────────────────────────────────────────
+renderLinks();
+</script>
+</body>
+</html>
