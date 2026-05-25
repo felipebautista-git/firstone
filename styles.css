@@ -1721,6 +1721,21 @@ input, select, textarea { font-family: var(--sans); }
 }
 .footer-bottom p { font-size: 0.75rem; color: var(--t3); }
 .footer-dw { color: var(--t3) !important; }
+.footer-private-access {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  color: var(--t3);
+  text-decoration: none;
+  opacity: 0.45;
+  transition: opacity var(--tr), color var(--tr);
+  letter-spacing: 0.03em;
+}
+.footer-private-access:hover {
+  opacity: 1;
+  color: var(--gold);
+}
 
 
 /* ================================================================
