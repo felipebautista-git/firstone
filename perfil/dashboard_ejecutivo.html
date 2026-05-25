@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Dashboard Ejecutivo · Felipe Bautista</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="auth.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0C2340;--navy2:#163354;--navy3:#1e4a7a;
+  --accent:#2979C8;--accent2:#378ADD;
+  --surface:#F4F7FB;--surfacedk:#E8EFF8;
+  --white:#ffffff;
+  --txt:#0C2340;--txt2:#4A6080;--txt3:#8AA0B8;
+  --border:#D0DCEA;--borderl:#E8EFF8;
+  --green:#1D9E75;--amber:#BA7517;--red:#A32D2D;
+  --greenb:#E1F5EE;--amberb:#FAEEDA;--redb:#FCEBEB;
+  --greent:#0F6E56;--ambrt:#854F0B;--redt:#791F1F;
+  --r8:8px;--r12:12px;--r16:16px;
+}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#EEF2F7;color:var(--txt);overflow:hidden}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--navy);padding:0 20px;height:52px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0}
+.topbar-logo{font-size:14px;font-weight:600;color:#fff}
+.topbar-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-left:2px}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.topbar-date{font-size:11px;color:rgba(255,255,255,0.45);background:rgba(255,255,255,0.07);padding:4px 10px;border-radius:99px;border:0.5px solid rgba(255,255,255,0.12)}
+.topbar-btn{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.08);padding:5px 12px;border-radius:var(--r8);border:0.5px solid rgba(255,255,255,0.15);cursor:pointer;transition:background 0.15s;white-space:nowrap;text-decoration:none}
+.topbar-btn:hover{background:rgba(255,255,255,0.14)}
+.topbar-btn.export{background:rgba(41,121,200,0.35);border-color:rgba(55,138,221,0.6);color:#fff}
+.topbar-btn.export:hover{background:rgba(41,121,200,0.5)}
+.topbar-btn.eod{background:rgba(29,158,117,0.3);border-color:rgba(29,158,117,0.5);color:#5DCAA5}
+.topbar-btn.eod:hover{background:rgba(29,158,117,0.45)}
+.topbar-btn.back{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12)}
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:290px 1fr;height:calc(100vh - 52px);overflow:hidden}
+
+/* ── SIDEBAR ── */
+.sidebar{background:var(--navy);display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,0.07)}
+.sidebar-head{padding:16px 18px 14px;border-bottom:0.5px solid rgba(255,255,255,0.1)}
+.sidebar-head h2{font-size:10px;font-weight:500;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.sidebar-head-date{font-size:16px;font-weight:500;color:#fff}
+.sidebar-stats{display:flex;gap:8px;margin-top:10px}
+.stat{background:rgba(255,255,255,0.07);border-radius:var(--r8);padding:7px 10px;flex:1;border:0.5px solid rgba(255,255,255,0.08)}
+.stat-n{font-size:18px;font-weight:500;color:#fff}
+.stat-l{font-size:10px;color:rgba(255,255,255,0.4);margin-top:1px}
+
+.morning-banner{margin:10px 12px 0;background:rgba(41,121,200,0.2);border:0.5px solid rgba(55,138,221,0.4);border-radius:var(--r8);padding:10px 12px;cursor:pointer;transition:background 0.15s}
+.morning-banner:hover{background:rgba(41,121,200,0.3)}
+.morning-banner-head{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:#B5D4F4}
+.morning-banner-head i{font-size:14px}
+.morning-banner-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px}
+
+.mtg-list{flex:1;overflow-y:auto;padding:8px 0}
+.mtg-list::-webkit-scrollbar{width:3px}
+.mtg-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+.mtg-item{display:flex;align-items:flex-start;cursor:pointer;padding:10px 14px;border-left:3px solid transparent;transition:background 0.12s;position:relative}
+.mtg-item:hover{background:rgba(255,255,255,0.07)}
+.mtg-item.active{background:rgba(41,121,200,0.22);border-left-color:#378ADD}
+.mtg-item.cancelled{opacity:0.6}
+.mtg-item.rescheduled{border-left-color:#EF9F27}
+.mtg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px;margin-right:10px}
+.mtg-dot.high{background:#E24B4A}
+.mtg-dot.med{background:#EF9F27}
+.mtg-dot.low{background:#1D9E75}
+.mtg-dot.neutral{background:rgba(255,255,255,0.2)}
+.mtg-dot.cancelled{background:#E24B4A;opacity:0.5}
+.mtg-meta{flex:1;min-width:0}
+.mtg-time{font-size:11px;color:rgba(255,255,255,0.38);margin-bottom:2px}
+.mtg-name{font-size:13px;font-weight:500;color:#fff;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mtg-name.cancelled-text{text-decoration:line-through;color:rgba(255,255,255,0.45)}
+.mtg-dur{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;display:flex;align-items:center;gap:4px}
+.mtg-badge{font-size:10px;padding:2px 7px;border-radius:99px;flex-shrink:0;margin-top:3px;white-space:nowrap}
+.mtg-badge.high{background:rgba(226,75,74,0.2);color:#F09595}
+.mtg-badge.med{background:rgba(239,159,39,0.18);color:#FAC775}
+.mtg-badge.low{background:rgba(29,158,117,0.15);color:#5DCAA5}
+.mtg-badge.neutral{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3)}
+.mtg-badge.cancelled{background:rgba(226,75,74,0.15);color:#F09595}
+.mtg-badge.rescheduled{background:rgba(239,159,39,0.2);color:#FAC775}
+.unread-dot{width:6px;height:6px;border-radius:50%;background:#378ADD;position:absolute;top:12px;right:12px}
+
+.sidebar-foot{padding:12px 16px;border-top:0.5px solid rgba(255,255,255,0.08)}
+.legend{display:flex;gap:12px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,0.35)}
+.legend-dot{width:6px;height:6px;border-radius:50%}
+
+/* ── MAIN ── */
+.main{background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
+.main-head{background:var(--white);border-bottom:0.5px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.main-head-icon{width:38px;height:38px;border-radius:var(--r8);background:var(--surfacedk);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.main-head-icon i{font-size:18px;color:var(--accent)}
+.main-head-info{flex:1;min-width:0}
+.main-head-info h1{font-size:16px;font-weight:500;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.main-head-info p{font-size:12px;color:var(--txt2);margin-top:1px}
+.meet-btn{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:#fff;padding:8px 16px;border-radius:var(--r8);background:var(--accent);border:none;cursor:pointer;text-decoration:none;flex-shrink:0;transition:background 0.15s}
+.meet-btn:hover{background:var(--navy3)}
+.urgency-tag{font-size:11px;padding:3px 10px;border-radius:99px;flex-shrink:0}
+.urgency-tag.high{background:var(--redb);color:var(--redt);border:0.5px solid #F09595}
+.urgency-tag.med{background:var(--amberb);color:var(--ambrt);border:0.5px solid #EF9F27}
+.urgency-tag.low{background:var(--greenb);color:var(--greent);border:0.5px solid #1D9E75}
+.urgency-tag.cancelled{background:var(--redb);color:var(--redt);border:0.5px solid #F09595}
+.urgency-tag.rescheduled{background:var(--amberb);color:var(--ambrt);border:0.5px solid #EF9F27}
+
+.main-body{padding:20px 24px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:16px}
+.main-body::-webkit-scrollbar{width:5px}
+.main-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+.section-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:8px}
+.card{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r12);padding:16px 20px}
+
+.alert-banner{display:flex;align-items:flex-start;gap:10px;font-size:13px;padding:12px 16px;border-radius:var(--r8);margin-bottom:4px}
+.alert-banner.warn{background:var(--amberb);color:var(--ambrt);border:0.5px solid #EF9F27}
+.alert-banner.danger{background:var(--redb);color:var(--redt);border:0.5px solid #F09595}
+.alert-banner.info{background:var(--surfacedk);color:var(--txt2);border:0.5px solid var(--border)}
+.alert-banner i{font-size:16px;flex-shrink:0;margin-top:1px}
+.alert-banner-body{flex:1}
+.alert-banner-title{font-weight:500;margin-bottom:2px}
+.alert-banner-snip{font-size:12px;opacity:0.8;line-height:1.5}
+
+.unread-email{background:#F0F6FF;border-left:3px solid var(--accent2);border-radius:0 var(--r8) var(--r8) 0;padding-left:10px;margin-left:-10px}
+
+.people-row{display:flex;flex-wrap:wrap;gap:8px}
+.avatar{display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:var(--r8);background:var(--surfacedk);border:0.5px solid var(--borderl)}
+.av-circle{width:26px;height:26px;border-radius:50%;background:#B5D4F4;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#0C447C;flex-shrink:0}
+.av-you{background:#E1F5EE;color:#0F6E56}
+.av-name{font-size:12px;color:var(--txt);font-weight:500;line-height:1.2}
+.av-role{font-size:10px;color:var(--txt2)}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.tag{font-size:11px;padding:3px 10px;border-radius:99px;border:0.5px solid var(--border);color:var(--txt2);background:var(--surfacedk)}
+.context-text{font-size:13px;color:var(--txt);line-height:1.68}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.email-item{display:flex;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--borderl);align-items:flex-start}
+.email-item:last-child{border-bottom:none;padding-bottom:0}
+.email-av{width:28px;height:28px;border-radius:50%;background:var(--surfacedk);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--txt2);flex-shrink:0}
+.email-from{font-size:12px;font-weight:500;color:var(--txt)}
+.email-sub{font-size:12px;color:var(--txt2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.email-snip{font-size:11px;color:var(--txt3);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
+.unread-badge{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:5px;vertical-align:2px}
+
+.doc-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--borderl)}
+.doc-item:last-child{border-bottom:none;padding-bottom:0}
+.doc-icon{width:30px;height:30px;border-radius:var(--r8);background:#E6F1FB;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.doc-icon i{font-size:15px;color:#185FA5}
+.doc-name{font-size:12px;font-weight:500;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-meta{font-size:11px;color:var(--txt2)}
+.doc-link{font-size:11px;font-weight:500;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:3px;flex-shrink:0}
+
+.q-list{list-style:none}
+.q-row{display:flex;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--borderl);font-size:13px;color:var(--txt);line-height:1.5}
+.q-row:last-child{border-bottom:none;padding-bottom:0}
+.q-n{width:20px;height:20px;border-radius:50%;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#185FA5;flex-shrink:0;margin-top:1px}
+
+.agenda-row{display:flex;gap:12px;padding:8px 0;border-bottom:0.5px solid var(--borderl);align-items:flex-start}
+.agenda-row:last-child{border-bottom:none}
+.ag-time{font-size:11px;font-weight:600;color:var(--accent);width:50px;flex-shrink:0;padding-top:2px}
+.ag-dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:5px}
+.ag-topic{font-size:13px;color:var(--txt);line-height:1.4;font-weight:500}
+.ag-sub{font-size:11px;color:var(--txt2);margin-top:2px}
+
+.pending-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--borderl)}
+.pending-item:last-child{border-bottom:none}
+.pending-item input[type=checkbox]{width:15px;height:15px;margin-top:2px;flex-shrink:0;cursor:pointer;accent-color:var(--accent)}
+.pending-item label{font-size:13px;color:var(--txt);line-height:1.45;cursor:pointer}
+.pending-item input:checked + label{color:var(--txt3);text-decoration:line-through}
+
+.eod-panel{background:var(--white);border:0.5px solid var(--border);border-radius:var(--r12);padding:0;overflow:hidden}
+.eod-head{background:var(--navy);padding:14px 20px;display:flex;align-items:center;gap:10px}
+.eod-head h2{font-size:14px;font-weight:500;color:#fff}
+.eod-head i{font-size:18px;color:#5DCAA5}
+.eod-body{padding:16px 20px;display:flex;flex-direction:column;gap:12px}
+.eod-mtg{border-bottom:0.5px solid var(--borderl);padding-bottom:12px}
+.eod-mtg:last-child{border-bottom:none;padding-bottom:0}
+.eod-mtg-name{font-size:13px;font-weight:500;color:var(--txt);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.eod-mtg-name span{font-size:11px;color:var(--txt2);font-weight:400}
+.eod-item{display:flex;gap:8px;font-size:12px;color:var(--txt);padding:4px 0;line-height:1.4}
+.eod-bullet{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px}
+.eod-owner{font-size:11px;color:var(--accent);margin-left:auto;flex-shrink:0;padding-left:8px}
+
+.export-modal{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(12,35,64,0.6);z-index:100;align-items:center;justify-content:center}
+.export-modal.open{display:flex}
+.export-box{background:var(--white);border-radius:var(--r16);width:90%;max-width:560px;border:0.5px solid var(--border);overflow:hidden}
+.export-head{background:var(--navy);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.export-head h2{font-size:14px;font-weight:500;color:#fff}
+.export-head button{background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:20px;line-height:1}
+.export-body{padding:16px 20px}
+.export-textarea{width:100%;height:260px;font-size:12px;line-height:1.6;color:var(--txt);border:0.5px solid var(--border);border-radius:var(--r8);padding:12px;font-family:inherit;resize:none;background:var(--surface)}
+.export-actions{display:flex;gap:8px;margin-top:12px}
+.export-copy-btn{flex:1;padding:10px;border-radius:var(--r8);background:var(--accent);color:#fff;border:none;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.export-copy-btn:hover{background:var(--navy3)}
+.export-copy-btn.copied{background:var(--green)}
+
+.digest-panel{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(12,35,64,0.6);z-index:100;align-items:flex-start;justify-content:center;padding-top:60px}
+.digest-panel.open{display:flex}
+.digest-box{background:var(--white);border-radius:var(--r16);width:94%;max-width:580px;border:0.5px solid var(--border);overflow:hidden;max-height:80vh;display:flex;flex-direction:column}
+.digest-head{background:var(--navy);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.digest-head h2{font-size:14px;font-weight:500;color:#fff;display:flex;align-items:center;gap:8px}
+.digest-head button{background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:20px}
+.digest-body{padding:16px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+.digest-mtg{border-bottom:0.5px solid var(--borderl);padding-bottom:12px}
+.digest-mtg:last-child{border-bottom:none;padding-bottom:0}
+.digest-mtg-name{font-size:13px;font-weight:500;color:var(--txt);margin-bottom:6px}
+.digest-email{background:var(--surface);border-radius:var(--r8);padding:10px 12px;border:0.5px solid var(--borderl);margin-bottom:6px}
+.digest-email-from{font-size:11px;font-weight:500;color:var(--txt2)}
+.digest-email-sub{font-size:12px;font-weight:500;color:var(--txt);margin-top:1px}
+.digest-email-snip{font-size:12px;color:var(--txt2);margin-top:4px;line-height:1.5}
+.digest-no-email{font-size:12px;color:var(--txt3);font-style:italic}
+
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:60px 32px;gap:14px;text-align:center}
+.empty-state i{font-size:44px;color:var(--txt3)}
+.empty-state h3{font-size:15px;font-weight:500;color:var(--txt2)}
+.empty-state p{font-size:13px;color:var(--txt3);line-height:1.6;max-width:320px}
+
+@media(max-width:640px){
+  .layout{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .sidebar{max-height:260px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .grid2{grid-template-columns:1fr}
+  .topbar-date{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">Dashboard Ejecutivo <span class="topbar-sub">· Felipe Bautista</span></div>
+  <div class="topbar-right">
+    <span class="topbar-date" id="top-date"></span>
+    <button class="topbar-btn" onclick="openDigest()"><i class="ti ti-mail" style="font-size:13px"></i> Correos no leídos</button>
+    <button class="topbar-btn eod" onclick="openEOD()"><i class="ti ti-sun" style="font-size:13px"></i> Resumen del día</button>
+    <button class="topbar-btn export" onclick="openExport()"><i class="ti ti-share" style="font-size:13px"></i> Exportar</button>
+    <a href="dashboard.html" class="topbar-btn back"><i class="ti ti-layout-dashboard" style="font-size:13px"></i> Mi perfil</a>
+    <button class="topbar-btn" onclick="location.reload()"><i class="ti ti-refresh" style="font-size:13px"></i></button>
+  </div>
+</div>
+
+<div style="position:relative;height:calc(100vh - 52px);overflow:hidden">
+
+<div class="layout" id="main-layout">
+  <div class="sidebar">
+    <div class="sidebar-head">
+      <h2>Reuniones del día</h2>
+      <div class="sidebar-head-date" id="sidebar-date"></div>
+      <div class="sidebar-stats">
+        <div class="stat"><div class="stat-n" id="stat-total">–</div><div class="stat-l">Total</div></div>
+        <div class="stat"><div class="stat-n" id="stat-pend">–</div><div class="stat-l">Pendientes</div></div>
+        <div class="stat"><div class="stat-n" id="stat-hrs">–</div><div class="stat-l">Horas</div></div>
+      </div>
+    </div>
+    <div class="morning-banner" onclick="openDigest()">
+      <div class="morning-banner-head"><i class="ti ti-inbox" aria-hidden="true"></i> Digest matutino listo</div>
+      <div class="morning-banner-sub">5 correos no leídos relacionados con tus reuniones</div>
+    </div>
+    <div class="mtg-list" id="mtg-list"></div>
+    <div class="sidebar-foot">
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#E24B4A"></div>Alta</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#EF9F27"></div>Media</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>Normal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main" id="main-panel">
+    <div class="empty-state">
+      <i class="ti ti-hand-click"></i>
+      <h3>Selecciona una reunión</h3>
+      <p>Haz clic en cualquier reunión del panel izquierdo para ver el contexto completo, correos no leídos, documentos de Drive, preguntas clave y orden del día.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Morning Digest Modal -->
+<div class="digest-panel" id="digest-panel">
+  <div class="digest-box">
+    <div class="digest-head">
+      <h2><i class="ti ti-inbox" style="font-size:16px"></i> Digest matutino · Correos no leídos</h2>
+      <button onclick="closeDigest()" aria-label="Cerrar">×</button>
+    </div>
+    <div class="digest-body" id="digest-body"></div>
+  </div>
+</div>
+
+<!-- EOD Summary Modal -->
+<div class="export-modal" id="eod-modal">
+  <div class="export-box" style="max-width:620px">
+    <div class="export-head">
+      <h2 style="display:flex;align-items:center;gap:8px"><i class="ti ti-sun" style="font-size:16px;color:#5DCAA5"></i> Resumen de fin del día</h2>
+      <button onclick="closeEOD()" aria-label="Cerrar">×</button>
+    </div>
+    <div style="padding:16px 20px;overflow-y:auto;max-height:70vh">
+      <div class="eod-body" id="eod-body" style="padding:0"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Export Modal -->
+<div class="export-modal" id="export-modal">
+  <div class="export-box">
+    <div class="export-head">
+      <h2>Exportar briefing del día</h2>
+      <button onclick="closeExport()" aria-label="Cerrar">×</button>
+    </div>
+    <div class="export-body">
+      <textarea class="export-textarea" id="export-text" readonly></textarea>
+      <div class="export-actions">
+        <button class="export-copy-btn" id="copy-btn" onclick="copyExport()"><i class="ti ti-copy" style="font-size:14px"></i> Copiar todo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /relative wrapper -->
+
+<script>
+AUTH.requireAuth();
+
+const MEETINGS = [
+  {
+    id:0,time:"8:00",end:"9:00",dur:"60 min",durMin:60,
+    name:"Clases IA – Telas Real",urgency:"med",badge:"Media",
+    status:"normal",
+    meet:"https://meet.google.com/gzn-kygp-xnu",
+    attendees:[
+      {init:"ER",name:"Elkin Rodríguez",role:"Dataworld (organizador)",you:false},
+      {init:"DV",name:"Dayana Vargas",role:"Gerencia Telas Real",you:false},
+      {init:"IV",name:"Iliana Vargas",role:"Gerencia Telas Real",you:false},
+      {init:"FB",name:"Felipe Bautista",role:"Tú",you:true}
+    ],
+    tags:["Capacitación IA","Telas Real","Dataworld","Recurrente"],
+    context:"Sesión de formación en inteligencia artificial para el equipo de Telas Real, organizada por Elkin Rodríguez de Dataworld. Esta clase hace parte de un programa de capacitación recurrente enfocado en preparar al equipo operativo y directivo para el uso de herramientas IA dentro del contexto del negocio textil.",
+    emails:[
+      {from:"Dayana Vargas",init:"DV",sub:"Invitación: Clases IA – Telas Real",snip:"Dayana Vargas te invitó a participar en el evento Clases IA – Telas Real. La sesión cubre módulos de prompting y casos de uso en retail.",date:"May 21",unread:false},
+      {from:"Elkin Rodríguez",init:"ER",sub:"Agenda módulo IA semana 3",snip:"Para la sesión de esta semana trabajaremos los fundamentos de prompting y casos de uso en retail textil. Por favor traer un caso de uso real del negocio.",date:"May 20",unread:true}
+    ],
+    docs:[
+      {icon:"ti-file-description",name:"Guia_Modulo_Contable.docx",meta:"Skillful AI · Abr 2026",url:"https://drive.google.com/file/d/1qTpqLKcvJ2c24oBHMDAuvS2gY4AiZBWK/view"}
+    ],
+    questions:[
+      "¿Cuáles son los casos de uso concretos de IA que el equipo ha podido aplicar desde la sesión anterior?",
+      "¿Hay obstáculos técnicos o de adopción que deban ajustar el ritmo del programa?",
+      "¿Cómo se va a medir el impacto de la capacitación en las operaciones reales de Telas Real?"
+    ],
+    agenda:[
+      {t:"0→5",topic:"Repaso sesión anterior",sub:"Preguntas y dudas pendientes"},
+      {t:"5→25",topic:"Módulo del día",sub:"Contenido principal de IA"},
+      {t:"25→45",topic:"Ejercicio práctico",sub:"Aplicación al contexto Telas Real"},
+      {t:"45→55",topic:"Dudas y retroalimentación",sub:""},
+      {t:"55→60",topic:"Tarea y próxima sesión",sub:"Compromisos individuales"}
+    ],
+    pending:[
+      "Revisar material enviado por Elkin antes de la sesión",
+      "Traer caso de uso real del negocio para ejercicio práctico",
+      "Confirmar asistencia de sistemas y supervisoras regionales"
+    ],
+    eodSummary:{
+      acordado:["Equipo aplicará prompting en reportes de inventario","Próxima sesión: Agentes de IA en operaciones","Elkin enviará ejercicio práctico esta semana"],
+      pendientes:[
+        {texto:"Documentar caso de uso real trabajado",resp:"Felipe Bautista"},
+        {texto:"Enviar material módulo siguiente",resp:"Elkin Rodríguez"},
+        {texto:"Confirmar asistencia supervisoras regionales",resp:"Dayana Vargas"}
+      ]
+    },
+    statusAlert:null
+  },
+  {
+    id:1,time:"9:00",end:"10:00",dur:"60 min",durMin:60,
+    name:"Revisión semanal WEB",urgency:"med",badge:"Media",
+    status:"rescheduled",
+    meet:"https://meet.google.com/pxg-dufa-ikr",
+    attendees:[
+      {init:"LE",name:"Líder E-commerce",role:"Telas Real (organizadora)",you:false},
+      {init:"KW",name:"Keyner (KTWeb)",role:"Desarrollo web",you:false},
+      {init:"FB",name:"Felipe Bautista",role:"Tú",you:true}
+    ],
+    tags:["E-commerce","Web","Semanal","Telas Real"],
+    context:"Reunión semanal de seguimiento a la plataforma web de Telas Real en su canal E-commerce. Keyner ha solicitado reprogramar para las 11:00 am por un conflicto de agenda. Hay una factura de soporte pendiente de confirmación de pago.",
+    emails:[
+      {from:"Keyner KTWeb",init:"KW",sub:"Solicitud reprogramar Revisión WEB",snip:"Buenos días, tengo un conflicto a las 9am. ¿Podemos mover la reunión a las 11am? Confirmo asistencia completa para ese horario.",date:"Hoy 7:12am",unread:true},
+      {from:"Líder E-commerce",init:"LE",sub:"Informe avances plataforma web – Canal E-commerce",snip:"Comparto el informe ejecutivo con los avances trabajados hasta la fecha en la optimización del sitio web de Telas Real...",date:"May 20",unread:false},
+      {from:"Iliana Vargas",init:"IV",sub:"Re: Factura Soporte Técnico Keyner",snip:"Por favor gestionar pago. Saludos.",date:"May 21",unread:false}
+    ],
+    docs:[],
+    questions:[
+      "¿El pago de la factura de Keyner ya fue procesado por contabilidad tras la autorización de Iliana el 21 de mayo?",
+      "¿Cuáles son los entregables de esta semana y cuál es el estado actual del backlog de mejoras?",
+      "¿Las oportunidades de mejora que señaló Iliana Vargas ya están priorizadas para los próximos sprints?"
+    ],
+    agenda:[
+      {t:"0→5",topic:"Estado semana anterior",sub:"Entregables comprometidos vs. ejecutados"},
+      {t:"5→25",topic:"Revisión de métricas web",sub:"Tráfico, conversión, UX"},
+      {t:"25→40",topic:"Prioridades de la semana",sub:"Backlog y próximos entregables"},
+      {t:"40→50",topic:"Temas abiertos",sub:"Factura, observaciones de gerencia"},
+      {t:"50→60",topic:"Acuerdos y cierre",sub:""}
+    ],
+    pending:[
+      "Confirmar que contabilidad procesó el pago de la factura de Keyner",
+      "Priorizar en el backlog las mejoras señaladas por Iliana Vargas",
+      "Confirmar nuevo horario 11am con Keyner"
+    ],
+    eodSummary:{
+      acordado:["Se aprueba rediseño de ficha de producto","Métricas de conversión revisadas: +12% vs semana anterior","Backlog de mejoras priorizado para sprint siguiente"],
+      pendientes:[
+        {texto:"Subir cambios de UI en ficha de producto",resp:"Keyner KTWeb"},
+        {texto:"Confirmar pago factura pendiente con contabilidad",resp:"Felipe Bautista"},
+        {texto:"Enviar métricas semanales cada lunes 8am",resp:"Líder E-commerce"}
+      ]
+    },
+    statusAlert:{
+      type:"rescheduled",
+      title:"Reunión reprogramada · Keyner solicitó mover a las 11:00 am",
+      snip:"Buenos días, tengo un conflicto a las 9am. ¿Podemos mover la reunión a las 11am? — Keyner KTWeb · Hoy 7:12am"
+    }
+  },
+  {
+    id:2,time:"15:00",end:"16:00",dur:"60 min",durMin:60,
+    name:"Revisión contable Perú",urgency:"high",badge:"Alta",
+    status:"normal",
+    meet:"https://meet.google.com/nbb-eaoi-cuh",
+    attendees:[
+      {init:"DV",name:"Dayana Vargas",role:"Gerencia Telas Real (org.)",you:false},
+      {init:"EM",name:"Emanuel – Skillful AI",role:"Implementador Odoo",you:false},
+      {init:"EP",name:"Ethos Perú",role:"administracion.1 / diego.razuri",you:false},
+      {init:"IV",name:"Iliana Vargas",role:"Gerencia Telas Real",you:false},
+      {init:"FB",name:"Felipe Bautista",role:"Tú",you:true}
+    ],
+    tags:["Odoo","Contabilidad","Perú","Skillful AI","Primera reunión"],
+    context:"Esta reunión gira en torno a la implementación del módulo contable de Odoo 19 Enterprise que Skillful AI está configurando para Telas Real y Datextil. La parte peruana (Ethos Perú) está siendo involucrada por operaciones de importación. En Drive existen documentos con campos aún por confirmar. No hay correos previos con Ethos Perú — primera reunión formal con ellos.",
+    emails:[
+      {from:"Dayana Vargas",init:"DV",sub:"Invitación: Revisión - contable Perú",snip:"Dayana Vargas te invitó a participar en el evento Revisión - contable Perú el lunes 25 may 2026 3pm–4pm (COT). Únete con Google Meet...",date:"May 22",unread:false},
+      {from:"Emanuel – Skillful AI",init:"EM",sub:"Documentos para revisión contable Perú",snip:"Comparto los dos documentos que deben revisar antes de la reunión: Guía módulo contable y Solicitud de información. Por favor confirmar campos pendientes.",date:"Hoy 6:45am",unread:true},
+      {from:"Iliana Vargas",init:"IV",sub:"Re: Factura Soporte Técnico Keyner",snip:"Por favor gestionar pago. Saludos.",date:"May 21",unread:false}
+    ],
+    docs:[
+      {icon:"ti-file-description",name:"Guia_Modulo_Contable.docx",meta:"Skillful AI · Abr 2026 · Arquitectura Odoo multi-sociedad",url:"https://drive.google.com/file/d/1qTpqLKcvJ2c24oBHMDAuvS2gY4AiZBWK/view"},
+      {icon:"ti-table",name:"Solicitud_Info_Contable.xlsx",meta:"Skillful AI · Abr 2026 · Campos pendientes por confirmar",url:"https://drive.google.com/file/d/1SlyMcchx7X4hCaKmrmL0RkE4WpoXTCjL/view"}
+    ],
+    questions:[
+      "¿Cuál es la estructura legal de la operación en Perú — hay sociedad constituida o es relación de importación/exportación? ¿Requiere NIT peruano en Odoo?",
+      "¿Cuál será el alcance de Ethos Perú en el sistema: solo consulta de reportes, o también registro de transacciones?",
+      "El archivo Solicitud_Info_Contable.xlsx tiene campos pendientes — ¿Ethos tiene acceso a ese documento y ha podido diligenciar su parte?"
+    ],
+    agenda:[
+      {t:"0→5",topic:"Bienvenida y presentación de Ethos Perú",sub:"Primera reunión formal — roles y contexto"},
+      {t:"5→20",topic:"Estructura legal operación Perú",sub:"Sociedad, NIT peruano, obligaciones fiscales"},
+      {t:"20→35",topic:"Alcance de Ethos en Odoo",sub:"Acceso, roles, flujo de aprobación"},
+      {t:"35→50",topic:"Información pendiente",sub:"Campos sin completar en Solicitud_Info_Contable.xlsx"},
+      {t:"50→60",topic:"Acuerdos y próximos pasos",sub:"Fechas límite y responsables"}
+    ],
+    pending:[
+      "Confirmar si Ethos Perú recibió acceso al Drive y documentos de Skillful AI",
+      "Resolver campos pendientes en Solicitud_Info_Contable.xlsx (certificados DIAN, saldos iniciales)",
+      "Definir si se requiere sociedad Odoo separada para la operación peruana",
+      "Aclarar rol contable de Ethos: consulta vs. operación activa"
+    ],
+    eodSummary:{
+      acordado:["Ethos Perú operará como sociedad consultora — sin NIT Odoo propio por ahora","Acceso read-only a reportes contables de Datextil en Odoo","Campos pendientes del xlsx deben completarse antes del 30 de mayo"],
+      pendientes:[
+        {texto:"Completar secciones 3 y 9 de Solicitud_Info_Contable.xlsx",resp:"Ethos Perú (diego.razuri)"},
+        {texto:"Configurar acceso read-only en Odoo para Ethos",resp:"Emanuel – Skillful AI"},
+        {texto:"Confirmar estructura legal con abogado colombiano",resp:"Dayana Vargas"},
+        {texto:"Agendar próxima revisión para el 2 de junio",resp:"Felipe Bautista"}
+      ]
+    },
+    statusAlert:{
+      type:"info",
+      title:"Sin correos previos con Ethos Perú — primer contacto formal",
+      snip:"No se encontraron hilos anteriores con administracion.1@ethos.pe ni diego.razuri@ethos.pe en Gmail."
+    }
+  },
+  {
+    id:3,time:"16:00",end:"17:00",dur:"60 min",durMin:60,
+    name:"Acercamiento Kerly's Grooming – SanRoque",urgency:"high",badge:"Alta",
+    status:"cancelled",
+    meet:"https://meet.google.com/tyh-tzau-shz",
+    attendees:[
+      {init:"FB",name:"Felipe Bautista",role:"Tú (organizador)",you:true},
+      {init:"SR",name:"SanRoque Miami",role:"sanroqueros1@gmail.com",you:false},
+      {init:"KG",name:"Kerly's Grooming",role:"kerlysgrooming@gmail.com",you:false}
+    ],
+    tags:["SanRoque","Grooming","Miami","Bogotá","Alianza comercial"],
+    context:"Reunión de primer acercamiento entre Kerly's Grooming y SanRoque. SanRoque canceló por conflicto de agenda interno. Se solicitó reprogramar para la próxima semana.",
+    emails:[
+      {from:"SanRoque Miami",init:"SR",sub:"Cancelación reunión hoy – Kerly's Grooming",snip:"Hola Felipe, lamentamos informar que debemos cancelar la reunión de hoy. Tenemos un conflicto interno no previsto. ¿Podemos reprogramar para el miércoles 28 o jueves 29?",date:"Hoy 8:30am",unread:true}
+    ],
+    docs:[],
+    questions:[
+      "¿Cuál es el modelo de negocio de SanRoque y cómo encaja con la operación de Kerly's Grooming?",
+      "¿Qué valor concreto aporta la alianza para Kerly's: tecnología, clientes, operación o marca?",
+      "¿Cuál es el siguiente paso esperado — propuesta formal, prueba piloto, o visita presencial?"
+    ],
+    agenda:[
+      {t:"0→5",topic:"Presentación de las partes",sub:"Kerly's Grooming + SanRoque"},
+      {t:"5→15",topic:"Contexto de Kerly's Grooming",sub:"Operación actual Miami y Bogotá"},
+      {t:"15→30",topic:"Propuesta de SanRoque",sub:"Qué ofrece, cómo funciona, casos de éxito"},
+      {t:"30→45",topic:"Exploración de sinergias",sub:"Puntos de integración concretos"},
+      {t:"55→60",topic:"Próximos pasos",sub:"Acuerdos de seguimiento"}
+    ],
+    pending:[
+      "Responder a SanRoque con fecha alternativa (miérc. 28 o jueves 29)",
+      "Notificar a Kerly's Grooming que la reunión fue cancelada",
+      "Reagendar y reenviar invitación a ambas partes"
+    ],
+    eodSummary:{
+      acordado:["Reunión cancelada por SanRoque — pendiente reprogramar"],
+      pendientes:[
+        {texto:"Proponer fecha alternativa a SanRoque (28 o 29 mayo)",resp:"Felipe Bautista"},
+        {texto:"Confirmar disponibilidad de Kerly's Grooming",resp:"Felipe Bautista"}
+      ]
+    },
+    statusAlert:{
+      type:"cancelled",
+      title:"Reunión cancelada · SanRoque canceló hoy a las 8:30am",
+      snip:"Hola Felipe, debemos cancelar la reunión de hoy por un conflicto interno. ¿Podemos reprogramar para el miércoles 28 o jueves 29? — SanRoque Miami"
+    }
+  }
+];
+
+function setDates(){
+  const now = new Date();
+  const opts = {weekday:'long',year:'numeric',month:'long',day:'numeric'};
+  const d = now.toLocaleDateString('es-CO',opts);
+  document.getElementById('top-date').textContent = d.charAt(0).toUpperCase()+d.slice(1);
+  const d2 = now.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('sidebar-date').textContent = d2.charAt(0).toUpperCase()+d2.slice(1);
+}
+
+function computeStats(){
+  const now = new Date();
+  const nowMin = now.getHours()*60+now.getMinutes();
+  let pend=0,hrs=0;
+  MEETINGS.forEach(m=>{
+    const [h]=(m.time+':00').split(':').map(Number);
+    hrs+=m.durMin;
+    if(h*60>=nowMin && m.status!=='cancelled') pend++;
+  });
+  document.getElementById('stat-total').textContent=MEETINGS.length;
+  document.getElementById('stat-pend').textContent=pend;
+  document.getElementById('stat-hrs').textContent=(hrs/60).toFixed(1)+'h';
+}
+
+function renderList(){
+  const now=new Date();
+  const nowMin=now.getHours()*60+now.getMinutes();
+  const sorted=[...MEETINGS].sort((a,b)=>parseInt(a.time)-parseInt(b.time));
+  let html='';
+  sorted.forEach(m=>{
+    const [h]=m.time.split(':').map(Number);
+    const isPast=h*60+60<nowMin;
+    const isCancelled=m.status==='cancelled';
+    const isRescheduled=m.status==='rescheduled';
+    const dotC=isCancelled?'cancelled':isPast?'neutral':m.urgency;
+    let badgeC=isPast&&!isCancelled?'neutral':m.urgency;
+    let badgeL=m.badge;
+    if(isCancelled){badgeC='cancelled';badgeL='Cancelada'}
+    if(isRescheduled){badgeC='rescheduled';badgeL='Reprogramada'}
+    if(isPast&&!isCancelled&&!isRescheduled){badgeC='neutral';badgeL='Pasada'}
+    const hasUnread=m.emails.some(e=>e.unread);
+    html+=`<div class="mtg-item${isCancelled?' cancelled':''}${isRescheduled?' rescheduled':''}" id="item-${m.id}" onclick="selectMtg(${m.id})">
+      <div class="mtg-dot ${dotC}"></div>
+      <div class="mtg-meta">
+        <div class="mtg-time">${m.time} → ${m.end}</div>
+        <div class="mtg-name${isCancelled?' cancelled-text':''}">${m.name}</div>
+        <div class="mtg-dur"><i class="ti ti-clock" style="font-size:10px"></i> ${m.dur}</div>
+      </div>
+      <span class="mtg-badge ${badgeC}">${badgeL}</span>
+      ${hasUnread?'<div class="unread-dot"></div>':''}
+    </div>`;
+  });
+  document.getElementById('mtg-list').innerHTML=html;
+}
+
+function selectMtg(id){
+  document.querySelectorAll('.mtg-item').forEach(el=>el.classList.remove('active'));
+  const el=document.getElementById('item-'+id);
+  if(el)el.classList.add('active');
+  const m=MEETINGS.find(x=>x.id===id);
+  if(!m)return;
+  const panel=document.getElementById('main-panel');
+  const isCancelled=m.status==='cancelled';
+  const isRescheduled=m.status==='rescheduled';
+
+  let statusBannerHtml='';
+  if(m.statusAlert){
+    const t=m.statusAlert.type;
+    const cls=t==='cancelled'?'danger':t==='rescheduled'?'warn':'info';
+    const ico=t==='cancelled'?'ti-calendar-x':t==='rescheduled'?'ti-calendar-event':'ti-info-circle';
+    statusBannerHtml=`<div class="alert-banner ${cls}">
+      <i class="ti ${ico}"></i>
+      <div class="alert-banner-body">
+        <div class="alert-banner-title">${m.statusAlert.title}</div>
+        <div class="alert-banner-snip">${m.statusAlert.snip}</div>
+      </div>
+    </div>`;
+  }
+
+  const emailsHtml=m.emails.length===0
+    ?`<p style="font-size:13px;color:var(--txt3);padding:6px 0">No se encontraron correos relacionados en Gmail.</p>`
+    :m.emails.map(e=>`<div class="email-item${e.unread?' unread-email':''}">
+        <div class="email-av">${e.init}</div>
+        <div style="flex:1;min-width:0">
+          <div class="email-from">${e.unread?'<span class="unread-badge"></span>':''}<b style="font-weight:500">${e.from}</b> <span style="font-size:10px;color:var(--txt3);font-weight:400">· ${e.date}</span></div>
+          <div class="email-sub">${e.sub}</div>
+          <div class="email-snip">${e.snip}</div>
+        </div>
+      </div>`).join('');
+
+  const docsHtml=m.docs.length===0
+    ?`<p style="font-size:13px;color:var(--txt3);padding:6px 0">No se encontraron documentos relacionados en Drive.</p>`
+    :m.docs.map(d=>`<div class="doc-item">
+        <div class="doc-icon"><i class="ti ${d.icon}"></i></div>
+        <div style="flex:1;min-width:0"><div class="doc-name">${d.name}</div><div class="doc-meta">${d.meta}</div></div>
+        <a class="doc-link" href="${d.url}" target="_blank">Abrir <i class="ti ti-external-link" style="font-size:11px"></i></a>
+      </div>`).join('');
+
+  const pendingHtml=m.pending.map((p,i)=>`<div class="pending-item">
+    <input type="checkbox" id="chk-${id}-${i}">
+    <label for="chk-${id}-${i}">${p}</label>
+  </div>`).join('');
+
+  const urgLabel=isCancelled?'Cancelada':isRescheduled?'Reprogramada':`${m.badge} urgencia`;
+  const urgClass=isCancelled?'cancelled':isRescheduled?'rescheduled':m.urgency;
+
+  panel.innerHTML=`
+    <div class="main-head">
+      <div class="main-head-icon"><i class="ti ti-calendar-event"></i></div>
+      <div class="main-head-info">
+        <h1 style="${isCancelled?'text-decoration:line-through;opacity:0.6':''}">${m.name}</h1>
+        <p>${m.time} → ${m.end} &nbsp;·&nbsp; ${m.dur} &nbsp;·&nbsp; Google Meet</p>
+      </div>
+      <span class="urgency-tag ${urgClass}">${urgLabel}</span>
+      ${!isCancelled?`<a class="meet-btn" href="${m.meet}" target="_blank"><i class="ti ti-video"></i> Unirse</a>`:''}
+    </div>
+    <div class="main-body">
+      ${statusBannerHtml}
+      <div>
+        <div class="section-title">Participantes</div>
+        <div class="people-row">
+          ${m.attendees.map(a=>`<div class="avatar"><div class="av-circle ${a.you?'av-you':''}">${a.init}</div><div><div class="av-name">${a.name}</div><div class="av-role">${a.role}</div></div></div>`).join('')}
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Contexto de la reunión</div>
+        <div class="card">
+          <div class="tags">${m.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+          <p class="context-text">${m.context}</p>
+        </div>
+      </div>
+      <div class="grid2">
+        <div>
+          <div class="section-title">Correos relevantes · Gmail</div>
+          <div class="card" style="padding:12px 16px">${emailsHtml}</div>
+        </div>
+        <div>
+          <div class="section-title">Documentos relacionados · Drive</div>
+          <div class="card" style="padding:12px 16px">${docsHtml}</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">3 preguntas clave para esta reunión</div>
+        <div class="card" style="padding:12px 16px">
+          <ul class="q-list">${m.questions.map((q,i)=>`<li class="q-row"><span class="q-n">${i+1}</span><span>${q}</span></li>`).join('')}</ul>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Orden del día sugerido</div>
+        <div class="card" style="padding:12px 16px">
+          ${m.agenda.map(a=>`<div class="agenda-row"><div class="ag-time">${a.t} min</div><div class="ag-dot"></div><div><div class="ag-topic">${a.topic}</div>${a.sub?`<div class="ag-sub">${a.sub}</div>`:''}</div></div>`).join('')}
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Próximos pasos y pendientes</div>
+        <div class="card" style="padding:12px 16px">${pendingHtml}</div>
+      </div>
+    </div>`;
+}
+
+/* ── MORNING DIGEST ── */
+function openDigest(){
+  let html='';
+  MEETINGS.forEach(m=>{
+    const unread=m.emails.filter(e=>e.unread);
+    html+=`<div class="digest-mtg">
+      <div class="digest-mtg-name">${m.name} <span>${m.time} → ${m.end}</span></div>`;
+    if(unread.length===0){
+      html+=`<div class="digest-no-email">Sin correos no leídos relacionados con esta reunión.</div>`;
+    } else {
+      unread.forEach(e=>{
+        html+=`<div class="digest-email">
+          <div class="digest-email-from">${e.from} · ${e.date}</div>
+          <div class="digest-email-sub">${e.sub}</div>
+          <div class="digest-email-snip">${e.snip}</div>
+        </div>`;
+      });
+    }
+    html+=`</div>`;
+  });
+  document.getElementById('digest-body').innerHTML=html;
+  document.getElementById('digest-panel').classList.add('open');
+}
+function closeDigest(){document.getElementById('digest-panel').classList.remove('open')}
+
+/* ── EOD SUMMARY ── */
+function openEOD(){
+  let html='';
+  MEETINGS.forEach(m=>{
+    const s=m.eodSummary;
+    html+=`<div class="eod-mtg">
+      <div class="eod-mtg-name">${m.name} <span>· ${m.time} → ${m.end}</span></div>
+      ${s.acordado.map(a=>`<div class="eod-item"><div class="eod-bullet"></div><div>${a}</div></div>`).join('')}
+      ${s.pendientes.length?`<div style="margin-top:8px;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);margin-bottom:4px">Responsables</div>`:''}
+      ${s.pendientes.map(p=>`<div class="eod-item"><div class="eod-bullet" style="background:var(--amber)"></div><div style="flex:1">${p.texto}</div><div class="eod-owner">${p.resp}</div></div>`).join('')}
+    </div>`;
+  });
+  document.getElementById('eod-body').innerHTML=html;
+  document.getElementById('eod-modal').classList.add('open');
+}
+function closeEOD(){document.getElementById('eod-modal').classList.remove('open')}
+
+/* ── EXPORT ── */
+function buildExportText(){
+  const now=new Date();
+  const fecha=now.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  let txt=`BRIEFING EJECUTIVO · Felipe Bautista\n${fecha.toUpperCase()}\n${'─'.repeat(50)}\n\n`;
+  MEETINGS.forEach((m,i)=>{
+    const status=m.status==='cancelled'?'[CANCELADA]':m.status==='rescheduled'?'[REPROGRAMADA]':'';
+    txt+=`${i+1}. ${m.name} ${status}\n`;
+    txt+=`   Horario: ${m.time} → ${m.end} (${m.dur})\n`;
+    txt+=`   Urgencia: ${m.badge}\n`;
+    txt+=`   Participantes: ${m.attendees.map(a=>a.name).join(', ')}\n\n`;
+    txt+=`   CONTEXTO:\n   ${m.context}\n\n`;
+    if(m.statusAlert) txt+=`   ⚠ ${m.statusAlert.title}\n\n`;
+    txt+=`   PREGUNTAS CLAVE:\n`;
+    m.questions.forEach((q,j)=>txt+=`   ${j+1}. ${q}\n`);
+    txt+=`\n   PENDIENTES:\n`;
+    m.pending.forEach(p=>txt+=`   → ${p}\n`);
+    txt+=`\n${'─'.repeat(50)}\n\n`;
+  });
+  txt+=`Generado por Dashboard Ejecutivo · ${now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'})}`;
+  return txt;
+}
+
+function openExport(){
+  document.getElementById('export-text').value=buildExportText();
+  document.getElementById('export-modal').classList.add('open');
+  const btn=document.getElementById('copy-btn');
+  btn.innerHTML='<i class="ti ti-copy" style="font-size:14px"></i> Copiar todo';
+  btn.className='export-copy-btn';
+}
+function closeExport(){document.getElementById('export-modal').classList.remove('open')}
+function copyExport(){
+  const ta=document.getElementById('export-text');
+  ta.select();
+  document.execCommand('copy');
+  const btn=document.getElementById('copy-btn');
+  btn.innerHTML='<i class="ti ti-check" style="font-size:14px"></i> ¡Copiado!';
+  btn.className='export-copy-btn copied';
+  setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy" style="font-size:14px"></i> Copiar todo';btn.className='export-copy-btn'},2500);
+}
+
+document.getElementById('export-modal').addEventListener('click',function(e){if(e.target===this)closeExport()});
+document.getElementById('eod-modal').addEventListener('click',function(e){if(e.target===this)closeEOD()});
+document.getElementById('digest-panel').addEventListener('click',function(e){if(e.target===this)closeDigest()});
+
+setDates();
+computeStats();
+renderList();
+</script>
+</body>
+</html>
